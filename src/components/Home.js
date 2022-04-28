@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Dropdown from './Dropdown';
 import SearchButton from './SearchButton';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
 import moment from 'moment';
+import Carousel from './Carousel';
 import './Home.css';
+import { useNavigate } from 'react-router-dom';
 
 function Home(){
     const [locationValue, setLocationValue] = useState('');
@@ -15,6 +17,8 @@ function Home(){
     const [checkInDate, setCheckInDate] = useState(new Date());
     const [holidaysData, setHolidaysData] = useState([]);
     const [error, setError] = useState('');
+
+    const navigate = useNavigate();
 
     const handleLocationChange = (e) => {
         setLocationValue(e.target.value);
@@ -79,29 +83,38 @@ function Home(){
         headers.append('Access-Control-Allow-Origin', 'http://localhost:3000');
     
         const response = await axios.post(url, payload, {headers: headers});
-        let responseData;
-        if(response && response.status === "200"){
-            responseData = setHolidaysData(response);
-        }else{
-            responseData = setError('No data found');
-        }
-        return responseData;
+        // let responseData;
+        // if(response && response.status === "200"){
+            // responseData = setHolidaysData(response);
+        // }else{
+        //     responseData = setError('No data found');
+        // }
+        return setHolidaysData([response]);
     }catch(err){
-        console.log(err.message);
-        }
+            console.log(err.message);
+        };
+    };
+
+    if(holidaysData && holidaysData.length >= 1){ 
+        localStorage.setItem("holidayData", JSON.stringify(holidaysData));
+        navigate("/hotel-details");
+    }else{
+        alert('No data found!');
+        window.reload();
     };
 
     return (
-    <div className="Select-container">
-        <h2>Search</h2>
-        <Dropdown title={"Boarding Type"} onChange={handleBoardingChange} allOption={boardingOptions}/>
-        <Dropdown title={"Location"} onChange={handleLocationChange} allOption={locationOptions}/>
-        <Dropdown title={"Adults"} onChange={handleAdultsChange} allOption={adultsOptions}/>
-        <Dropdown title={"Infants"} onChange={handleInfantsChange} allOption={infantsOptions}/>
-        <h4>Checkin date</h4>
-        <DatePicker selected={checkInDate} onChange={(date) => setCheckInDate(date)}/>
-        
-        <SearchButton title={"Search"} onClick={handleSearch}/>
+    <div>
+        <div className="Select-container">
+            <h2>Search</h2>
+            <Dropdown title={"Boarding Type"} onChange={handleBoardingChange} allOption={boardingOptions}/>
+            <Dropdown title={"Location"} onChange={handleLocationChange} allOption={locationOptions}/>
+            <Dropdown title={"Adults"} onChange={handleAdultsChange} allOption={adultsOptions}/>
+            <Dropdown title={"Infants"} onChange={handleInfantsChange} allOption={infantsOptions}/>
+            <h4>Checkin date</h4>
+            <DatePicker selected={checkInDate} onChange={(date) => setCheckInDate(date)}/>
+            <SearchButton title={"Search"} onClick={handleSearch}/>
+        </div>
     </div>
 )}
 
