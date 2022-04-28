@@ -1,14 +1,18 @@
 import React from 'react';
 
 function Dropdown(props){
+    let list = props.allOption && props.allOption.map((opt, i) => { 
+        return <option key={i} value={opt.value}>{opt.label}</option>
+    });
+
     return(
-    <select name="selectList" id="selectList" onChange={props.onChange}>
-        <option value="">Select</option>
-        <option value="new-york">new-york</option>
-        <option value="orlando">orlando</option>
-        <option value="barbados">barbados</option>
-        <option value="toronto">toronto</option>
-    </select>
+    <div>
+        <h4>{props.title}</h4>
+        <select name="selectList" id="selectList" onChange={props.onChange}>
+            <option value="">Select</option>
+            {list}
+        </select>
+    </div>
     );
 }
 
