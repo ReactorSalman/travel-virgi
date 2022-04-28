@@ -2,7 +2,7 @@ import React from 'react';
 
 function Dropdown(props){
     return(
-    <select name="selectList" id="selectList" onChange={props.handleOptionChange}>
+    <select name="selectList" id="selectList" onChange={props.onChange}>
         <option value="">Select</option>
         <option value="new-york">new-york</option>
         <option value="orlando">orlando</option>
