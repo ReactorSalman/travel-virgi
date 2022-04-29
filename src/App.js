@@ -5,7 +5,7 @@ import HotelDetails from "./components/HotelDetails";
 
 function App() {
   return (
-    <div className="App">
+    <div className="">
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="hotel-details" element={<HotelDetails/>}/>

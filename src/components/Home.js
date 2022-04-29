@@ -8,6 +8,7 @@ import moment from 'moment';
 import Carousel from './Carousel';
 import './Home.css';
 import { useNavigate } from 'react-router-dom';
+import HotelDetails from "./HotelDetails";
 
 function Home(){
     const [locationValue, setLocationValue] = useState('');
@@ -17,6 +18,7 @@ function Home(){
     const [checkInDate, setCheckInDate] = useState(new Date());
     const [holidaysData, setHolidaysData] = useState([]);
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
 
@@ -57,8 +59,8 @@ function Home(){
         {label: "2", value: "2"},
     ];
 
-    const handleSearch = async () => {
-        try{
+    const handleSearch = () => {
+        setLoading(true);
         const dateWrapper = moment.utc(checkInDate).format('DD-MM-YYYY');
         const adultsValueToNumber = Number(adultsValue);
         const infantValueToNumber = Number(infantsValue);
@@ -82,44 +84,56 @@ function Home(){
         headers.append('Origin','*');
         headers.append('Access-Control-Allow-Origin', 'http://localhost:3000');
     
-        const response = await axios.post(url, payload, {headers: headers});
-        // let responseData;
-        // if(response && response.status === "200"){
-            // responseData = setHolidaysData(response);
-        // }else{
-        //     responseData = setError('No data found');
-        // }
-        return setHolidaysData([response]);
-    }catch(err){
-            console.log(err.message);
-        };
-    };
-
-    if(holidaysData && holidaysData.length >= 1){ 
-        localStorage.setItem("holidayData", JSON.stringify(holidaysData));
-        navigate("/hotel-details");
+        axios.post(url, payload, {headers: headers})
+        .then((response) => {
+            setLoading(false);
+            return setHolidaysData([response])
+        })
+        .catch((err) => {
+            setLoading(false);
+            setError(err.message);
+        });
     };
 
     return (
-    <div className="home-container">
-        <div className="home-select-container">
-            <div>
-                <Dropdown title={"Boarding Type"} onChange={handleBoardingChange} allOption={boardingOptions}/>
-            </div>
-            <div>
-                <Dropdown title={"Location"} onChange={handleLocationChange} allOption={locationOptions}/>
-            </div>
-                <Dropdown title={"Adults"} onChange={handleAdultsChange} allOption={adultsOptions}/>
-                <Dropdown title={"Infants"} onChange={handleInfantsChange} allOption={infantsOptions}/>
-            <div>
-                <span><h4>Checkin date</h4></span>
-                <DatePicker className="home-datePicker" selected={checkInDate} onChange={(date) => setCheckInDate(date)}/>
-            </div>
-            <div>
-                <SearchButton title={"Search"} onClick={handleSearch}/>
+    <div>
+        <div className="home-site-header-bg">
+                <div className="home-site-header">
+                    Travel veerji
+                </div>
+        </div>
+        <div className="home-container">
+            <div className="home-select-container">
+                <div>
+                    <Dropdown title={"Boarding Type"} onChange={handleBoardingChange} allOption={boardingOptions}/>
+                </div>
+                <div>
+                    <Dropdown title={"Location"} onChange={handleLocationChange} allOption={locationOptions}/>
+                </div>
+                    <Dropdown title={"Adults"} onChange={handleAdultsChange} allOption={adultsOptions}/>
+                    <Dropdown title={"Infants"} onChange={handleInfantsChange} allOption={infantsOptions}/>
+                <div>
+                    <span><h4>Checkin date</h4></span>
+                    <DatePicker className="home-datePicker" selected={checkInDate} onChange={(date) => setCheckInDate(date)}/>
+                </div>
+                <div className="home-search-margin">
+                    <SearchButton title={"Search"} onClick={handleSearch}/>
+                </div>
             </div>
         </div>
-        
+            {loading ? (
+                <div className="home-loader"></div>
+            ): (
+                <div>
+                    {holidaysData.length >= 1 
+                    ? (
+                        <HotelDetails hotelDetailsData={holidaysData} />
+                        )
+                    : 
+                    <div className="home-error-message">{error}</div>
+                    }
+                </div>
+            )}
     </div>
 )}
 

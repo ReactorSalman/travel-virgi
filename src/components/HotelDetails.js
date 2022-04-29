@@ -33,10 +33,13 @@ function HotelDetails(props){
 
     const [filterHotelDetails, setFilterHotelDetails] = useState([]);
     
-    const _hotelsData = localStorage.getItem("holidayData");
-    const _hotelHolidaysDetails = JSON.parse(_hotelsData)[0].data.holidays;
+    /** To get data via local storage*/ 
+    // const _hotelsData = localStorage.getItem("holidayData");
+    // const _hotelHolidaysDetails = JSON.parse(_hotelsData)[0].data.holidays;
 
-    console.log(_hotelHolidaysDetails);
+    const _hotelHolidaysDetails = props && props.hotelDetailsData[0] && props.hotelDetailsData[0].data &&
+                                    props.hotelDetailsData[0].data.holidays;
+
 
     const handleStarChange = (e) => {
         let newStarArray = [];
@@ -51,25 +54,30 @@ function HotelDetails(props){
             }
         });
         setStarArray(newStarArray);
-        filterHotels();
+        filterHotelsByRatings(newStarArray);
     }
 
 
-    const filterHotels = () => {
-        let checkedStarArray = starArray.filter((star) => {
+    const filterHotelsByRatings = (newStarArray) => {
+        let checkedStarArray = newStarArray.filter((star) => {
             return star.isChecked === true
         });
 
         let hotelDetails;
+
         if(checkedStarArray){
-            hotelDetails = _hotelHolidaysDetails.filter((hotl) => 
-                hotl.hotel.content.vRating > Math.min(...checkedStarArray.map((starArray) => 
-                Number(starArray.value))));
+            hotelDetails = _hotelHolidaysDetails.filter((hotel) => {
+                return hotel.hotel.content.starRating == checkedStarArray.every(arr =>  arr)});
         }
-        if(hotelDetails.length >= 1 && checkedStarArray.length >= 1){
+
+        console.log("hotelDetails", hotelDetails);
+        if(hotelDetails.length >= 1 && 
+            (checkedStarArray.value == "1" || checkedStarArray.value == "2" ||
+            checkedStarArray.value == "3" || checkedStarArray.value == "4" || 
+            checkedStarArray.value == "5")){
             setFilterHotelDetails(hotelDetails);
         }else{
-            console.log("No data found");
+            setFilterHotelDetails(_hotelHolidaysDetails);
         }
         console.log("filterHotelDetails",filterHotelDetails); 
     }
@@ -87,6 +95,15 @@ function HotelDetails(props){
             }
         });
         setPricePerPersonArray(newPricePersonArray);
+        filterPricePerPerson();
+    }
+
+    const filterPricePerPerson = () => {
+        let pricePerPerson = pricePerPersonArray.filter((price) => {
+            return price.isChecked === true
+        });
+        console.log("pricePerPerson",pricePerPerson);
+        let filterPricePerCategory = _hotelHolidaysDetails.filter(price => price.pricePerPerson < 300);
     }
 
     const handleFacilityChange = (e) => {
@@ -106,19 +123,14 @@ function HotelDetails(props){
 
     return(
         <section id="page">
-            <header>
-                <div className="site-header">
-                    Travel veerji
-                </div>
-            </header>
             <span className="filter-container">
                 <div className="filter-container-bg">
                     <h2 className="filter-header">Filter by:</h2>
                     <div>
                         <h4 className="ratings-header">Star rating</h4>
                         {starArray.map((option) => (
-                        <label className="container">{option.label}
-                            <input 
+                        <label className="container" key={`star${option.value}`}>{option.label}
+                            <input
                                 type="checkbox" 
                                 id={`star${option.value}`}
                                 checked={Boolean(option.isChecked)} 
@@ -132,8 +144,8 @@ function HotelDetails(props){
                     <div>
                     <h4>Price per person</h4>
                     { pricePerPersonArray && pricePerPersonArray.map((option) => (
-                        <label className="container">{option.label}
-                            <input 
+                        <label className="container" key={`price${option.value}`}>{option.label}
+                            <input
                                 type="checkbox" 
                                 id={`price${option.value}`}
                                 checked={Boolean(option.isChecked)} 
@@ -147,8 +159,8 @@ function HotelDetails(props){
                     <div>
                     <h4>Hotel facilities</h4>
                     {hotelFacilities && hotelFacilities.map((option) => (
-                        <label className="container">{option.label}
-                            <input 
+                        <label className="container" key={`facility${option.value}`}>{option.label}
+                            <input
                                 type="checkbox" 
                                 id={`facility${option.value}`}
                                 checked={Boolean(option.isChecked)} 
@@ -161,8 +173,8 @@ function HotelDetails(props){
                 </div>
             </span>
             <main>
-                {filterHotelDetails && filterHotelDetails.map(hotelData => (
-                <div id="hotel-details-card">
+                {filterHotelDetails && filterHotelDetails.map((hotelData, id) => (
+                <div id="hotel-details-card" key={id}>
                     <div>
                         <div className="hotel-image">
                             <img src="" 
@@ -179,6 +191,7 @@ function HotelDetails(props){
                         <img src={hotelData.hotel.tripAdvisor.ratingImageUrl} alt="ratings"/>
                         </div>
                         <div>{hotelData.hotel.tripAdvisor.numReviews} reviews</div>
+                        {/* <div>{`${hotelData.hotel.content.vRating} star ratings`}</div> */}
                         <div className="price-per-person">Price/Person: $ {hotelData.pricePerPerson}</div>
                     </div>
                 </div>))}

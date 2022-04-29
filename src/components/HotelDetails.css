@@ -11,7 +11,7 @@
   
   #page > header {
     grid-area: head;
-    background-color: #8ca0ff;
+    background-image: linear-gradient(45deg, #553c9a, #b393d3) ;
   }
   
   #page > span {
@@ -25,15 +25,6 @@
   #page > footer {
     grid-area: foot;
     background-color: #8cffa0;
-  }
-
-  .site-header {
-      text-align: left;
-      margin-left: 40px;
-      margin-top: 1em;
-      font-size: 30px;
-      font-family: Cursive;
-      color: white;
   }
 
   .register {
@@ -52,7 +43,7 @@
       width: 90%;
       height: 50%;
       margin-left: 5%;
-      margin-top: 5%;
+      margin-top: 2%;
       border: 1px solid grey;
       grid-template-columns: 1fr 1fr 1fr;
       grid-gap: 5px;
@@ -71,7 +62,8 @@
       overflow: auto;
   }
 
-  .hotel-name { color: #2CA4B0; 
+  .hotel-name { 
+    color: #553c9a; 
     font-family: 'Lobster', Lucida; 
     font-size: 25px; 
     font-weight: normal;   
@@ -88,11 +80,10 @@
 .see-description {
     position: relative;
     margin-top: 10px;
-    color: #2CA4B0;
+    color: #b393d3;
     text-align: right;
 }
 
-/* Customize the label (the container) */
 .container {
     display: block;
     position: relative;
@@ -107,7 +98,6 @@
     text-align: left;
   }
   
-  /* Hide the browser's default checkbox */
   .container input {
     position: absolute;
     opacity: 0;
@@ -116,7 +106,6 @@
     width: 0;
   }
   
-  /* Create a custom checkbox */
   .checkmark {
     position: absolute;
     top: 0;
@@ -127,29 +116,24 @@
     padding-left: 2px;
   }
   
-  /* On mouse-over, add a grey background color */
   .container:hover input ~ .checkmark {
     background-color: #ccc;
   }
   
-  /* When the checkbox is checked, add a blue background */
   .container input:checked ~ .checkmark {
-    background-color: #2196F3;
+    background-color: #553c9a;
   }
   
-  /* Create the checkmark/indicator (hidden when not checked) */
   .checkmark:after {
     content: "";
     position: absolute;
     display: none;
   }
   
-  /* Show the checkmark when checked */
   .container input:checked ~ .checkmark:after {
     display: block;
   }
   
-  /* Style the checkmark/indicator */
   .container .checkmark:after {
     left: 9px;
     top: 5px;
@@ -165,13 +149,14 @@
   .filter-container {
       padding: 10%;
       width: 250px;
-      margin-top: 4.5%;
+      margin-top: 38%;
   }
 
   .filter-container-bg {
-      background-color: coral;
+      background-image: linear-gradient(to bottom left, #553c9a, #b393d3);
       padding: 10%;
-      border: 1px solid coral;
+      color: white;
+      border: 1px solid #b393d3;
   }
 
   h2, h4 {
