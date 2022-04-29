@@ -30,6 +30,7 @@
   .site-header {
       text-align: left;
       margin-left: 40px;
+      margin-top: 1em;
       font-size: 30px;
       font-family: Cursive;
       color: white;
@@ -53,9 +54,9 @@
       margin-left: 5%;
       margin-top: 5%;
       border: 1px solid grey;
-      border-radius: 5px;
       grid-template-columns: 1fr 1fr 1fr;
       grid-gap: 5px;
+      position: relative;
   }
   
   #hotel-details-card > div {
@@ -82,7 +83,6 @@
     margin-top: 20px;
     text-align: right;
     position: relative;
-    justify-content: relative;
 }
 
 .see-description {

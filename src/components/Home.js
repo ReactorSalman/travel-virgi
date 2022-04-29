@@ -98,23 +98,28 @@ function Home(){
     if(holidaysData && holidaysData.length >= 1){ 
         localStorage.setItem("holidayData", JSON.stringify(holidaysData));
         navigate("/hotel-details");
-    }else{
-        alert('No data found!');
-        window.reload();
     };
 
     return (
-    <div>
-        <div className="Select-container">
-            <h2>Search</h2>
-            <Dropdown title={"Boarding Type"} onChange={handleBoardingChange} allOption={boardingOptions}/>
-            <Dropdown title={"Location"} onChange={handleLocationChange} allOption={locationOptions}/>
-            <Dropdown title={"Adults"} onChange={handleAdultsChange} allOption={adultsOptions}/>
-            <Dropdown title={"Infants"} onChange={handleInfantsChange} allOption={infantsOptions}/>
-            <h4>Checkin date</h4>
-            <DatePicker selected={checkInDate} onChange={(date) => setCheckInDate(date)}/>
-            <SearchButton title={"Search"} onClick={handleSearch}/>
+    <div className="home-container">
+        <div className="home-select-container">
+            <div>
+                <Dropdown title={"Boarding Type"} onChange={handleBoardingChange} allOption={boardingOptions}/>
+            </div>
+            <div>
+                <Dropdown title={"Location"} onChange={handleLocationChange} allOption={locationOptions}/>
+            </div>
+                <Dropdown title={"Adults"} onChange={handleAdultsChange} allOption={adultsOptions}/>
+                <Dropdown title={"Infants"} onChange={handleInfantsChange} allOption={infantsOptions}/>
+            <div>
+                <span><h4>Checkin date</h4></span>
+                <DatePicker className="home-datePicker" selected={checkInDate} onChange={(date) => setCheckInDate(date)}/>
+            </div>
+            <div>
+                <SearchButton title={"Search"} onClick={handleSearch}/>
+            </div>
         </div>
+        
     </div>
 )}
 

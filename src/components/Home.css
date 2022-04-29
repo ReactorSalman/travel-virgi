@@ -1,4 +1,21 @@
-/* .Select-container {
-    display: inherit;
-    background-color: coral;
-} */
+.home-container {
+    border: 1px solid brown;
+    padding: 5%;
+}
+
+.home-select-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+}
+
+.home-datePicker {
+    max-width: 50%;
+    position: relative;
+    margin-right: 45%;
+}
+
+h4 {
+    text-align: left;
+}
