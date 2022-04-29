@@ -11,11 +11,13 @@ import { useNavigate } from 'react-router-dom';
 import HotelDetails from "./HotelDetails";
 
 function Home(){
+    let date = new Date();
+    date.setDate(date.getDate() + 1);
     const [locationValue, setLocationValue] = useState('');
     const [boardingValue, setBoardingValue] = useState('');
     const [adultsValue, setAdultsValue] = useState('');
     const [infantsValue, setInfantsValue] = useState('');
-    const [checkInDate, setCheckInDate] = useState(new Date());
+    const [checkInDate, setCheckInDate] = useState(date);
     const [holidaysData, setHolidaysData] = useState([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -58,6 +60,11 @@ function Home(){
         {label: "1", value: "1"}, 
         {label: "2", value: "2"},
     ];
+
+    const yesterday = moment().subtract(1, 'day');
+    const disablePastDate = current => {
+        return current.isArray(yesterday);
+    }
 
     const handleSearch = () => {
         setLoading(true);
@@ -114,7 +121,11 @@ function Home(){
                     <Dropdown title={"Infants"} onChange={handleInfantsChange} allOption={infantsOptions}/>
                 <div>
                     <span><h4>Checkin date</h4></span>
-                    <DatePicker className="home-datePicker" selected={checkInDate} onChange={(date) => setCheckInDate(date)}/>
+                    <DatePicker className="home-datePicker" 
+                                selected={checkInDate} 
+                                onChange={(date) => setCheckInDate(date)}
+                                minDate={moment().toDate()}
+                    />
                 </div>
                 <div className="home-search-margin">
                     <SearchButton title={"Search"} onClick={handleSearch}/>

@@ -1,27 +1,30 @@
 // import { useEffect, useState } from "react";
 // import "./Carousel.css";
 // import { FaArrowAltCircleRight, FaArrowAltCircleLeft } from "react-icons/fa";
+// import axios from 'axios';
 
-// export default function Carousel(props) {
+// export default function Carousel() {
 //   const [images, setImages] = useState([]);
 //   const [current, setCurrent] = useState(0);
 //   const [durationInput, setDurationInput] = useState(0);
 //   const [rotation, setRotation] = useState("");
 
-//   console.log(props.carouselData);
 
 //   useEffect(() => {
 //     const fetchImages = () => {
-//         fetch("https://demo5110359.mockable.io/images")
-//         .then((res) => res.json())
-//         .then((data) => {
-//           data = data.images.map((item) => {
-//             return item;
-//           });
-//           setImages(data);
+//         const url = "https://evening-ridge-73218.herokuapp.com/https://www.virginholidays.co.uk/d3hk78fplavsbl.cloudfront.net/assets/common-prod/hotel/205/748545/748545-1-results_carousel.jpg?version=26";
+//         let headers = new Headers();
+//         headers.append('Content-Type', 'application/json');
+//         headers.append('Accept', 'application/json');
+//         headers.append('Origin','*');
+//         headers.append('Access-Control-Allow-Origin', 'http://localhost:3000');
+    
+//         axios.get(url, {headers: headers})
+//         .then((response) => {
+//             console.log(response)
 //         })
 //         .catch((err) => {
-//           console.log("Unable to fetch images", err);
+//             console.log(err);
 //         });
 //     };
 //     fetchImages();
@@ -76,7 +79,7 @@
 
 //   return (
 //     <div>
-//       <section className="text-section">
+//       {/* <section className="text-section">
 //         <span>Duration: </span>
 //         <input
 //           id="durationId"
@@ -107,7 +110,7 @@
 //         <button className="button-style" onClick={handleOnClick}>
 //           Submit
 //         </button>
-//       </section>
+//       </section> */}
 //       <section className="slide-section">
 //         <FaArrowAltCircleLeft className="left-arrow" onClick={prevSlide} />
 //         <FaArrowAltCircleRight className="right-arrow" onClick={nextSlide} />

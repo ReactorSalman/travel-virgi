@@ -66,8 +66,8 @@ function HotelDetails(props){
         let hotelDetails;
 
         if(checkedStarArray){
-            hotelDetails = _hotelHolidaysDetails.filter((hotel) => {
-                return hotel.hotel.content.starRating == checkedStarArray.every(arr =>  arr)});
+            hotelDetails = _hotelHolidaysDetails.filter((hotl) => {
+                return hotl.hotel.content.starRating == 1 });
         }
 
         console.log("hotelDetails", hotelDetails);
@@ -173,29 +173,69 @@ function HotelDetails(props){
                 </div>
             </span>
             <main>
-                {filterHotelDetails && filterHotelDetails.map((hotelData, id) => (
-                <div id="hotel-details-card" key={id}>
-                    <div>
-                        <div className="hotel-image">
-                            <img src="" 
-                                    alt="hotel" width="285" height="260"/>
-                        </div>
-                    </div>
-                    <div>
-                        <div className="hotel-name">{hotelData.hotel.name}</div>
-                        {/* <div className="hotel-descprition">{hotelData.hotel.content.hotelDescription}</div> */}
-                        <div className="see-description">See description</div>
-                    </div>
-                    <div>
+                {filterHotelDetails.length >= 1 
+                ? (<div> {filterHotelDetails.map((hotelData, id) => (
+                    <div id="hotel-details-card" key={id}>
                         <div>
-                        <img src={hotelData.hotel.tripAdvisor.ratingImageUrl} alt="ratings"/>
+                            <div className="hotel-image">
+                                <img src="" 
+                                        alt="hotel" width="285" height="260"/>
+                            </div>
+                            <div>
+                            </div>
                         </div>
-                        <div>{hotelData.hotel.tripAdvisor.numReviews} reviews</div>
-                        {/* <div>{`${hotelData.hotel.content.vRating} star ratings`}</div> */}
-                        <div className="price-per-person">Price/Person: $ {hotelData.pricePerPerson}</div>
+                        <div>
+                            <div className="hotel-name">{hotelData.hotel.name}</div>
+                            {/* <div className="hotel-descprition">{hotelData.hotel.content.hotelDescription}</div> */}
+                            <div className="see-description">See description</div>
+                        </div>
+                        <div>
+                            <div>
+                            <img src={hotelData.hotel.tripAdvisor.ratingImageUrl} alt="ratings"/>
+                            </div>
+                            <div>{hotelData.hotel.tripAdvisor.numReviews} reviews</div>
+                            {/* <div>{`${hotelData.hotel.content.vRating} star ratings`}</div> */}
+                            <div className="price-per-person">Price/Person: $ {hotelData.pricePerPerson}</div>
+                        </div>
                     </div>
-                </div>))}
-            </main>
+                ))}
+                </div>) 
+                : (
+                    <div> 
+                        {_hotelHolidaysDetails.map((hotelData, id) => (
+                        <div id="hotel-details-card" key={id}>
+                            <div>
+                                <div className="hotel-image">
+                                    <img src="" 
+                                            alt="hotel" width="285" height="260"/>
+                                </div>
+                            </div>
+                            <div>
+                                <div className="hotel-name">
+                                    {hotelData.hotel.name}
+                                </div>
+                                {/* <div className="hotel-descprition">{hotelData.hotel.content.hotelDescription}</div> */}
+                                <div className="see-description">
+                                    See description
+                                </div>
+                            </div>
+                            <div className="hotel-review-price-details">
+                                <div>
+                                <img src={hotelData.hotel.tripAdvisor.ratingImageUrl} alt="ratings"/>
+                                </div>
+                                <div>
+                                    {hotelData.hotel.tripAdvisor.numReviews} reviews
+                                </div>
+                                {/* <div>{`${hotelData.hotel.content.vRating} star ratings`}</div> */}
+                                <div>
+                                    Price/Person: $ {hotelData.pricePerPerson}
+                                </div>
+                            </div>
+                        </div>
+                        ))}
+                    </div>
+                    )}
+                </main>
             {/* <footer>Footer</footer> */}
         </section>
     )
