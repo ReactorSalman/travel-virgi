@@ -106,7 +106,7 @@ function Home(){
     <div>
         <div className="home-site-header-bg">
                 <div className="home-site-header">
-                    Travel veerji
+                    <strong>Travel veerji</strong>
                 </div>
         </div>
         <div className="home-container">

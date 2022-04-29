@@ -12,10 +12,10 @@ function HotelDetails(props){
     ]);
 
     const [pricePerPersonArray, setPricePerPersonArray] = useState([
-        {label: "Less than $300", value: "1", isChecked: false, name:"price1"},
-        {label: "$300 to $600", value: "2", isChecked: false, name:"price2"}, 
-        {label: "$600 to $900", value: "3", isChecked: false, name:"price3"}, 
-        {label: "Greater than $900", value: "4", isChecked: false, name:"price4"},
+        {label: "Less than $300", value: "1", isChecked: false, name:"price1", min:0, max:300},
+        {label: "$300 to $600", value: "2", isChecked: false, name:"price2", min:300, max:600}, 
+        {label: "$600 to $900", value: "3", isChecked: false, name:"price3", min:600, max:900}, 
+        {label: "Greater than $900", value: "4", isChecked: false, name:"price4", min:900, max: 100000},
     ]);
 
     const [hotelFacilities, setHotelFacilities] = useState([
@@ -66,20 +66,12 @@ function HotelDetails(props){
         let hotelDetails;
 
         if(checkedStarArray){
-            hotelDetails = _hotelHolidaysDetails.filter((hotl) => {
-                return hotl.hotel.content.starRating == 1 });
+            let selectedStars = checkedStarArray.map(el => el = Number(el.value));
+            let selectedHotels = selectedStars.map((st) => _hotelHolidaysDetails.filter((hotel) => hotel.hotel.content.starRating == st));
+            let hotelDetailsFlat = selectedHotels.flat(); 
+            setFilterHotelDetails(hotelDetailsFlat);
+            console.log("hotelDetails",hotelDetailsFlat);
         }
-
-        console.log("hotelDetails", hotelDetails);
-        if(hotelDetails.length >= 1 && 
-            (checkedStarArray.value == "1" || checkedStarArray.value == "2" ||
-            checkedStarArray.value == "3" || checkedStarArray.value == "4" || 
-            checkedStarArray.value == "5")){
-            setFilterHotelDetails(hotelDetails);
-        }else{
-            setFilterHotelDetails(_hotelHolidaysDetails);
-        }
-        console.log("filterHotelDetails",filterHotelDetails); 
     }
 
     const handlePricePerPersonChange = (e) => {
@@ -95,15 +87,19 @@ function HotelDetails(props){
             }
         });
         setPricePerPersonArray(newPricePersonArray);
-        filterPricePerPerson();
+        filterPricePerPerson(newPricePersonArray);
     }
 
-    const filterPricePerPerson = () => {
-        let pricePerPerson = pricePerPersonArray.filter((price) => {
+    const filterPricePerPerson = (newPricePersonArray) => {
+        let pricePerPerson = newPricePersonArray.filter((price) => {
             return price.isChecked === true
         });
         console.log("pricePerPerson",pricePerPerson);
-        let filterPricePerCategory = _hotelHolidaysDetails.filter(price => price.pricePerPerson < 300);
+        let min = Math.min(...pricePerPerson.map((pp) => pp.min));
+        let max = Math.max(...pricePerPerson.map((pp) => pp.max));
+        let filterPricePerCategory = _hotelHolidaysDetails.filter(price => price.pricePerPerson > min && price.pricePerPerson < max);
+        setFilterHotelDetails(filterPricePerCategory);
+        console.log("filterPricePerCategory", filterPricePerCategory);
     }
 
     const handleFacilityChange = (e) => {
@@ -178,22 +174,23 @@ function HotelDetails(props){
                     <div id="hotel-details-card" key={id}>
                         <div>
                             <div className="hotel-image">
-                                <img src="" 
+                                <img src="//d3hk78fplavsbl.cloudfront.net/assets/common-prod/hotel/205/748545/748545-1-results_carousel.jpg?version=26" 
                                         alt="hotel" width="285" height="260"/>
                             </div>
                             <div>
                             </div>
                         </div>
                         <div>
-                            <div className="hotel-name">{hotelData.hotel.name}</div>
-                            {/* <div className="hotel-descprition">{hotelData.hotel.content.hotelDescription}</div> */}
-                            <div className="see-description">See description</div>
+                            <div className="hotel-name">{hotelData && hotelData.hotel && hotelData.hotel.name}</div>
+                            <div className="hotel-descprition">{hotelData.hotel.content.hotelDescription}</div>
                         </div>
                         <div>
                             <div>
-                            <img src={hotelData.hotel.tripAdvisor.ratingImageUrl} alt="ratings"/>
+                            {hotelData && hotelData.hotel && hotelData.hotel.tripAdvisor &&
+                            <img src={hotelData.hotel.tripAdvisor.ratingImageUrl} alt="ratings"/>}
                             </div>
-                            <div>{hotelData.hotel.tripAdvisor.numReviews} reviews</div>
+                            <div>{hotelData && hotelData.hotel && hotelData.hotel.tripAdvisor &&
+                                    hotelData.hotel.tripAdvisor.numReviews} reviews</div>
                             {/* <div>{`${hotelData.hotel.content.vRating} star ratings`}</div> */}
                             <div className="price-per-person">Price/Person: $ {hotelData.pricePerPerson}</div>
                         </div>
@@ -202,33 +199,32 @@ function HotelDetails(props){
                 </div>) 
                 : (
                     <div> 
-                        {_hotelHolidaysDetails.map((hotelData, id) => (
+                        {_hotelHolidaysDetails.length >= 1 && _hotelHolidaysDetails.map((hotelData, id) => (
                         <div id="hotel-details-card" key={id}>
                             <div>
                                 <div className="hotel-image">
-                                    <img src="" 
+                                    <img src={hotelData.hotel.content.images[0].RESULTS_CAROUSEL.url} 
                                             alt="hotel" width="285" height="260"/>
                                 </div>
                             </div>
                             <div>
                                 <div className="hotel-name">
-                                    {hotelData.hotel.name}
+                                    {hotelData && hotelData.hotel && hotelData.hotel.name}
                                 </div>
-                                {/* <div className="hotel-descprition">{hotelData.hotel.content.hotelDescription}</div> */}
-                                <div className="see-description">
-                                    See description
-                                </div>
+                                <div className="hotel-descprition">{hotelData.hotel.content.hotelDescription}</div>
                             </div>
                             <div className="hotel-review-price-details">
                                 <div>
-                                <img src={hotelData.hotel.tripAdvisor.ratingImageUrl} alt="ratings"/>
+                                {hotelData && hotelData.hotel && hotelData.hotel.tripAdvisor &&
+                                <img src={hotelData.hotel.tripAdvisor.ratingImageUrl} alt="ratings"/>}
                                 </div>
                                 <div>
-                                    {hotelData.hotel.tripAdvisor.numReviews} reviews
+                                    {hotelData && hotelData.hotel && hotelData.hotel.tripAdvisor &&
+                                    hotelData.hotel.tripAdvisor.numReviews} reviews
                                 </div>
                                 {/* <div>{`${hotelData.hotel.content.vRating} star ratings`}</div> */}
                                 <div>
-                                    Price/Person: $ {hotelData.pricePerPerson}
+                                    Price/Person: $ {hotelData && hotelData.pricePerPerson}
                                 </div>
                             </div>
                         </div>

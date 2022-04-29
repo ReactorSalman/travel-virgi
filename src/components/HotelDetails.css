@@ -49,9 +49,9 @@
 
   .hotel-descprition {
       font-size: 10px;
-      text-align: left;
-      margin-top: 10px;
-      overflow: auto;
+      text-align: justify;
+      margin-top: 15px;
+      text-overflow: clip;
   }
 
   .hotel-name { 
@@ -61,6 +61,7 @@
     font-weight: normal;   
     text-shadow: 1px 0 0 #fff;
     text-align: left;
+    text-overflow: clip;
 }
  
 .hotel-review-price-details {
