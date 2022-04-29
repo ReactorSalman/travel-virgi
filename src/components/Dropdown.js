@@ -3,15 +3,15 @@ import './Dropdown.css';
 
 function Dropdown(props){
     let list = props.allOption && props.allOption.map((opt, i) => { 
-        return <option key={i} value={opt.value}>{opt.label}</option>
+        return <option key={i} value={opt.value} className="dropdown-option">{opt.label}</option>
     });
 
     return(
     <div>
-        <h4 className="dropdown-title">{props.title}</h4>
+        <h3 className="dropdown-title">{props.title}</h3>
         <div className="select-list">
-            <select name="selectList" id="selectList" onChange={props.onChange}>
-                <option value="">Select</option>
+            <select className="dropdown-select" name="selectList" id="selectList" onChange={props.onChange}>
+                <option value="" className="dropdown-option">Select</option>
                 {list}
             </select>
         </div>

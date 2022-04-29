@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './HotelDetails.css';
+import ProgressBar from './ProgressBar';
 
 function HotelDetails(props){
 
@@ -64,13 +65,11 @@ function HotelDetails(props){
         });
 
         let hotelDetails;
-
         if(checkedStarArray){
             let selectedStars = checkedStarArray.map(el => el = Number(el.value));
             let selectedHotels = selectedStars.map((st) => _hotelHolidaysDetails.filter((hotel) => hotel.hotel.content.starRating == st));
             let hotelDetailsFlat = selectedHotels.flat(); 
             setFilterHotelDetails(hotelDetailsFlat);
-            console.log("hotelDetails",hotelDetailsFlat);
         }
     }
 
@@ -115,6 +114,24 @@ function HotelDetails(props){
             }
         });
         setHotelFacilities(newFacilityArray);
+        filterHotelDataViaFacility(newFacilityArray);
+    }
+
+    const filterHotelDataViaFacility = (newFacilityArray) => {
+        let checkedFacilityArray = newFacilityArray.filter((facility) => {
+            return facility.isChecked === true
+        });
+
+        let facilityDetails;
+        console.log(checkedFacilityArray);
+        if(checkedFacilityArray){
+            let selectedFacility = checkedFacilityArray.filter(el => el = el.label);
+            console.log(selectedFacility);
+            // let selectedHotels = _hotelHolidaysDetails.filter((hotl) => hotl.hotel.content.hotelFacilities.int));
+            // let hotelDetailsFacilityFlat = selectedHotels.flat(); 
+            console.log();
+            // setFilterHotelDetails(hotelDetailsFlat);
+        }
     }
 
     return(
@@ -173,12 +190,18 @@ function HotelDetails(props){
                 ? (<div> {filterHotelDetails.map((hotelData, id) => (
                     <div id="hotel-details-card" key={id}>
                         <div>
+                            {hotelData ? 
                             <div className="hotel-image">
-                                <img src="//d3hk78fplavsbl.cloudfront.net/assets/common-prod/hotel/205/748545/748545-1-results_carousel.jpg?version=26" 
-                                        alt="hotel" width="285" height="260"/>
-                            </div>
+                            {hotelData && hotelData.hotel && 
+                                hotelData.hotel.content && hotelData.hotel.content.images[0] &&
+                                    hotelData.hotel.content.images[0].RESULTS_CAROUSEL &&
+                                <img src={hotelData.hotel.content.images[0].RESULTS_CAROUSEL.url} 
+                                    alt="hotel" width="285" height="260"/>}
+                            </div> :
                             <div>
+                                <ProgressBar />
                             </div>
+                            }
                         </div>
                         <div>
                             <div className="hotel-name">{hotelData && hotelData.hotel && hotelData.hotel.name}</div>
@@ -202,10 +225,18 @@ function HotelDetails(props){
                         {_hotelHolidaysDetails.length >= 1 && _hotelHolidaysDetails.map((hotelData, id) => (
                         <div id="hotel-details-card" key={id}>
                             <div>
-                                <div className="hotel-image">
-                                    <img src={hotelData.hotel.content.images[0].RESULTS_CAROUSEL.url} 
-                                            alt="hotel" width="285" height="260"/>
-                                </div>
+                            {hotelData ? 
+                            <div className="hotel-image">
+                            {hotelData && hotelData.hotel && 
+                                hotelData.hotel.content && hotelData.hotel.content.images[0] &&
+                                    hotelData.hotel.content.images[0].RESULTS_CAROUSEL &&
+                                <img src={hotelData.hotel.content.images[0].RESULTS_CAROUSEL.url} 
+                                    alt="hotel" width="285" height="260"/>}
+                            </div> :
+                            <div>
+                                <ProgressBar />
+                            </div>
+                            }
                             </div>
                             <div>
                                 <div className="hotel-name">

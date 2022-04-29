@@ -115,16 +115,28 @@ function Home(){
                     <Dropdown title={"Boarding Type"} onChange={handleBoardingChange} allOption={boardingOptions}/>
                 </div>
                 <div>
-                    <Dropdown title={"Location"} onChange={handleLocationChange} allOption={locationOptions}/>
+                    <Dropdown className="home-location-width" title={"Location"} onChange={handleLocationChange} allOption={locationOptions}/>
                 </div>
                     <Dropdown title={"Adults"} onChange={handleAdultsChange} allOption={adultsOptions}/>
                     <Dropdown title={"Infants"} onChange={handleInfantsChange} allOption={infantsOptions}/>
                 <div>
-                    <span><h4>Checkin date</h4></span>
+                    <span><h3>Checkin date</h3></span>
                     <DatePicker className="home-datePicker" 
                                 selected={checkInDate} 
                                 onChange={(date) => setCheckInDate(date)}
                                 minDate={moment().toDate()}
+                                popperPlacement="left"
+                                popperModifiers={{
+                                    flip: {
+                                        behavior: ["left"]
+                                    },
+                                    preventOverflow: {
+                                        enabled: false
+                                    },
+                                    hide: {
+                                        enabled: false
+                                    }
+                                }}
                     />
                 </div>
                 <div className="home-search-margin">
@@ -133,7 +145,9 @@ function Home(){
             </div>
         </div>
             {loading ? (
+                <>
                 <div className="home-loader"></div>
+                </>
             ): (
                 <div>
                     {holidaysData.length >= 1 
