@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, lazy } from 'react';
 import Dropdown from './Dropdown';
 import SearchButton from './SearchButton';
 import DatePicker from 'react-datepicker';
@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
 import moment from 'moment';
 import './Home.css';
-import HotelDetails from "./HotelDetails";
+const HotelDetails = React.lazy(() => import("./HotelDetails"));
 
 function Home(){
     let date = new Date();
