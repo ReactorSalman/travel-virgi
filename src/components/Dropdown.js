@@ -10,7 +10,11 @@ function Dropdown(props){
     <div>
         <h3 className="dropdown-title">{props.title}</h3>
         <div className="select-list">
-            <select className="dropdown-select" name="selectList" id="selectList" onChange={props.onChange}>
+            <select className="dropdown-select" 
+                    name="selectList" 
+                    id="selectList" 
+                    onChange={props.onChange}
+                    >
                 <option value="" className="dropdown-option">Select</option>
                 {list}
             </select>

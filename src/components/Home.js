@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Dropdown from './Dropdown';
 import SearchButton from './SearchButton';
 import DatePicker from 'react-datepicker';
@@ -22,7 +22,6 @@ function Home(){
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const navigate = useNavigate();
 
     const handleLocationChange = (e) => {
         setLocationValue(e.target.value);
@@ -60,11 +59,6 @@ function Home(){
         {label: "1", value: "1"}, 
         {label: "2", value: "2"},
     ];
-
-    const yesterday = moment().subtract(1, 'day');
-    const disablePastDate = current => {
-        return current.isArray(yesterday);
-    }
 
     const handleSearch = () => {
         setLoading(true);
@@ -126,17 +120,6 @@ function Home(){
                                 onChange={(date) => setCheckInDate(date)}
                                 minDate={moment().toDate()}
                                 popperPlacement="left"
-                                popperModifiers={{
-                                    flip: {
-                                        behavior: ["left"]
-                                    },
-                                    preventOverflow: {
-                                        enabled: false
-                                    },
-                                    hide: {
-                                        enabled: false
-                                    }
-                                }}
                     />
                 </div>
                 <div className="home-search-margin">
@@ -155,7 +138,7 @@ function Home(){
                         <HotelDetails hotelDetailsData={holidaysData} />
                         )
                     : 
-                    <div className="home-error-message">{error}</div>
+                        <>{error && <div className="home-error-message">{`${error}, Please fill all details to proceed!`}</div>}</>
                     }
                 </div>
             )}

@@ -1,36 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './HotelDetails.css';
 import ProgressBar from './ProgressBar';
+import {ratings, pricePerPersonData, facilitiesData} from "../constants";
 
 function HotelDetails(props){
 
-    const [starArray, setStarArray] = useState([
-        {label: "1 star", value: "1", isChecked: false, name:"star1"},
-        {label: "2 stars", value: "2", isChecked: false, name:"star2"}, 
-        {label: "3 stars", value: "3", isChecked: false, name:"star3"}, 
-        {label: "4 stars", value: "4", isChecked: false, name:"star4"},
-        {label: "5 stars", value: "5", isChecked: false, name:"star5"},
-    ]);
+    const [starArray, setStarArray] = useState([]);
 
-    const [pricePerPersonArray, setPricePerPersonArray] = useState([
-        {label: "Less than $300", value: "1", isChecked: false, name:"price1", min:0, max:300},
-        {label: "$300 to $600", value: "2", isChecked: false, name:"price2", min:300, max:600}, 
-        {label: "$600 to $900", value: "3", isChecked: false, name:"price3", min:600, max:900}, 
-        {label: "Greater than $900", value: "4", isChecked: false, name:"price4", min:900, max: 100000},
-    ]);
+    const [pricePerPersonArray, setPricePerPersonArray] = useState([]);
 
-    const [hotelFacilities, setHotelFacilities] = useState([
-        {label: "Bar", value: "1", isChecked: false, name:"facility1"},
-        {label: "Restaurant", value: "2", isChecked: false, name:"facility2"}, 
-        {label: "Free parking", value: "3", isChecked: false, name:"facility3"}, 
-        {label: "Swimming pool", value: "4", isChecked: false, name:"facility4"},
-        {label: "Safety Deposit Box", value: "5", isChecked: false, name:"facility5"},
-        {label: "Fitness Centre/Gym", value: "6", isChecked: false, name:"facility6"},
-        {label: "Laundry Service", value: "7", isChecked: false, name:"facility7"}, 
-        {label: "Games Room", value: "8", isChecked: false, name:"facility8"}, 
-        {label: "Internet Access", value: "9", isChecked: false, name:"facility9"},
-        {label: "Whirlpool", value: "10", isChecked: false, name:"facility10"},
-    ]);
+    const [hotelFacilities, setHotelFacilities] = useState([]);
 
     const [filterHotelDetails, setFilterHotelDetails] = useState([]);
     
@@ -40,6 +19,8 @@ function HotelDetails(props){
 
     const _hotelHolidaysDetails = props && props.hotelDetailsData[0] && props.hotelDetailsData[0].data &&
                                     props.hotelDetailsData[0].data.holidays;
+    
+    console.log(_hotelHolidaysDetails);
 
 
     const handleStarChange = (e) => {
@@ -72,6 +53,31 @@ function HotelDetails(props){
             setFilterHotelDetails(hotelDetailsFlat);
         }
     }
+
+    const filterBy = ({type, value}) => {
+        let filterByType = _hotelHolidaysDetails.filter((item) => {
+            if(type === "starRating"){
+                return value.includes(item.hotel.content.starRating);
+            }
+            if(type === "pricePerPerson"){
+                return value.includes(item.pricePerPerson);
+            }
+            if(type === "hotelFacilities"){
+                return item.hotel.content.hotelFacilities.filter((item) => {
+                    return value.includes(item);
+                });
+            }
+        })
+    }
+
+    const [filteredArray, setFilteredArray] = useState([]);
+
+    useEffect(() => {
+        const filterByStar = filterBy({type: 'starRating', value: starArray});
+        const filterByPrice = filterBy({type: 'pricePerPerson', value: pricePerPersonArray});
+        const filterByFacility = filterBy({type: 'hotelFacilities', value: hotelFacilities});
+        setFilteredArray([...filterByStar, ...filterByPrice, ...filterByFacility]);
+    }, [starArray, pricePerPersonArray, hotelFacilities]);
 
     const handlePricePerPersonChange = (e) => {
         let newPricePersonArray = [];
@@ -141,7 +147,7 @@ function HotelDetails(props){
                     <h2 className="filter-header">Filter by:</h2>
                     <div>
                         <h4 className="ratings-header">Star rating</h4>
-                        {starArray.map((option) => (
+                        {ratings.map((option) => (
                         <label className="container" key={`star${option.value}`}>{option.label}
                             <input
                                 type="checkbox" 
@@ -156,7 +162,7 @@ function HotelDetails(props){
 
                     <div>
                     <h4>Price per person</h4>
-                    { pricePerPersonArray && pricePerPersonArray.map((option) => (
+                    {pricePerPersonData.map((option) => (
                         <label className="container" key={`price${option.value}`}>{option.label}
                             <input
                                 type="checkbox" 
@@ -171,7 +177,7 @@ function HotelDetails(props){
 
                     <div>
                     <h4>Hotel facilities</h4>
-                    {hotelFacilities && hotelFacilities.map((option) => (
+                    {hotelFacilities.map((option) => (
                         <label className="container" key={`facility${option.value}`}>{option.label}
                             <input
                                 type="checkbox" 
