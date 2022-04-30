@@ -1,4 +1,4 @@
-import React, { useState, lazy } from 'react';
+import React, { useState } from 'react';
 import Dropdown from './Dropdown';
 import SearchButton from './SearchButton';
 import DatePicker from 'react-datepicker';
@@ -6,7 +6,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
 import moment from 'moment';
 import './Home.css';
+import {locationOptions, boardingOptions, adultsOptions, infantsOptions} from "../constants";
 const HotelDetails = React.lazy(() => import("./HotelDetails"));
+
 
 function Home(){
     let date = new Date();
@@ -36,27 +38,6 @@ function Home(){
     const handleInfantsChange = (e) => {
         setInfantsValue(e.target.value);
     }
-
-    const locationOptions = [
-        {label: "new-york", value: "new-york"},
-        {label: "orlando", value: "orlando"}, 
-        {label: "barbados", value: "barbados"}, 
-        {label: "toronto", value: "toronto"},
-    ];
-
-    const boardingOptions = [{label: "hotel", value: "hotel"},];
-
-    const adultsOptions = [
-        {label: "1", value: "1"}, 
-        {label: "2", value: "2"}, 
-        {label: "3", value: "3"},
-    ];
-
-    const infantsOptions = [
-        {label: "0", value: "0"}, 
-        {label: "1", value: "1"}, 
-        {label: "2", value: "2"},
-    ];
 
     const handleSearch = () => {
         setLoading(true);
