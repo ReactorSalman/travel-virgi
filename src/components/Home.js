@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Dropdown from './Dropdown';
 import SearchButton from './SearchButton';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
 import moment from 'moment';
-import Carousel from './Carousel';
 import './Home.css';
-import { useNavigate } from 'react-router-dom';
 import HotelDetails from "./HotelDetails";
 
 function Home(){
@@ -132,15 +130,16 @@ function Home(){
                 <div className="home-loader"></div>
                 </>
             ): (
-                <div>
-                    {holidaysData.length >= 1 
-                    ? (
-                        <HotelDetails hotelDetailsData={holidaysData} />
-                        )
-                    : 
-                        <>{error && <div className="home-error-message">{`${error}, Please fill all details to proceed!`}</div>}</>
-                    }
-                </div>
+                    <div>
+                        {holidaysData.length >= 1
+                            ? (
+                                <HotelDetails hotels={(holidaysData[0] && holidaysData[0].data &&
+                                    holidaysData[0].data.holidays) || []} />
+                            )
+                            :
+                            <>{error && <div className="home-error-message">{`${error}, Please fill all details to proceed!`}</div>}</>
+                        }
+                    </div>
             )}
     </div>
 )}

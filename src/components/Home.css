@@ -84,6 +84,9 @@ h3 {
 }
 
 .home-error-message {
-    color: red;
-    text-align: center
+    margin-left: 20%;
+    font-size: 30px;
+    color: #8B0000;
+    font-family: 'Fira Sans', serif;
+    text-align: left;
 }

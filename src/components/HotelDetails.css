@@ -155,3 +155,26 @@
   h2, h4 {
       text-align: left;
   }
+
+  .hotel-not-found {
+    display: flex;
+    flex-shrink: 0;
+    margin-left: 20%;
+    font-size: 50px;
+    color: #8B0000;
+    font-family: 'Fira Sans', serif;
+    text-align: justify;
+    /* animation: slide-left 20s linear infinite;
+  } */
+  }
+
+  /* @keyframes slide-left{
+    from {
+      -webkit-transform: translateX(0);
+              transform: translateX(0);
+    }
+    to {
+      -webkit-transform: translateX(-100%);
+              transform: translateX(-100%);
+    }
+  } */

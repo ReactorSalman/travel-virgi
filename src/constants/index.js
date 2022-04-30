@@ -27,14 +27,14 @@ const ratings = [
     {label: "5 stars", value: "5", isChecked: false, name:"star5"},
 ];
 
-const pricePerPersonData = [
-    {label: "Less than $300", value: "1", isChecked: false, name:"price1", min:0, max:300},
-    {label: "$300 to $600", value: "2", isChecked: false, name:"price2", min:300, max:600}, 
-    {label: "$600 to $900", value: "3", isChecked: false, name:"price3", min:600, max:900}, 
-    {label: "Greater than $900", value: "4", isChecked: false, name:"price4", min:900, max: 100000},
+const pricePerPerson = [
+    {label: "Less than $500", value: "1", isChecked: false, name:"price1", min:0, max:500},
+    {label: "$500 to $1000", value: "2", isChecked: false, name:"price2", min:500, max:1000}, 
+    {label: "$1000 to $1500", value: "3", isChecked: false, name:"price3", min:1000, max:1500}, 
+    {label: "Greater than $1500", value: "4", isChecked: false, name:"price4", min:1500, max: 100000},
 ];
 
-const facilitiesData = [
+const facilities = [
     {label: "Bar", value: "1", isChecked: false, name:"facility1"},
     {label: "Restaurant", value: "2", isChecked: false, name:"facility2"}, 
     {label: "Free parking", value: "3", isChecked: false, name:"facility3"}, 
@@ -47,4 +47,4 @@ const facilitiesData = [
     {label: "Whirlpool", value: "10", isChecked: false, name:"facility10"},
 ];
 
-export {locationOptions, boardingOptions, adultsOptions, infantsOptions, ratings, pricePerPersonData, facilitiesData};
+export {locationOptions, boardingOptions, adultsOptions, infantsOptions, ratings, pricePerPerson, facilities};

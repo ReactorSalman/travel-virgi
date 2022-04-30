@@ -9,10 +9,10 @@ function Dropdown(props){
     return(
     <div>
         <h3 className="dropdown-title">{props.title}</h3>
-        <div className="select-list">
+        <div className="select-list" id="selectList">
             <select className="dropdown-select" 
                     name="selectList" 
-                    id="selectList" 
+                    id="select-list" 
                     onChange={props.onChange}
                     >
                 <option value="" className="dropdown-option">Select</option>
