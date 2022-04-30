@@ -68,3 +68,20 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### Setup project in local machine
+
+Clone the project from github in your machine : [https://github.com/ReactorSalman/travel-virgi]
+
+Install all mandatory libraries using:
+
+### `npm install`
+
+The project is integerated with heroku to use cors, library used is cors-anywhere: [https://www.npmjs.com/package/cors-anywhere]
+
+Once all libraries installed start server in the directory using:
+
+### `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
