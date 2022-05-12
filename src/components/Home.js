@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import Dropdown from './Dropdown';
-import SearchButton from './SearchButton';
+import Dropdown from './common/Dropdown';
+import Button from './common/Button';
+import Input from './common/Input';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
@@ -14,7 +15,7 @@ function Home(){
     let date = new Date();
     date.setDate(date.getDate() + 1);
     const [locationValue, setLocationValue] = useState('');
-    const [boardingValue, setBoardingValue] = useState('');
+    const [boardingValue, setBoardingValue] = useState('hotel');
     const [adultsValue, setAdultsValue] = useState('');
     const [infantsValue, setInfantsValue] = useState('');
     const [checkInDate, setCheckInDate] = useState(date);
@@ -25,10 +26,6 @@ function Home(){
 
     const handleLocationChange = (e) => {
         setLocationValue(e.target.value);
-    }
-
-    const handleBoardingChange = (e) => {
-        setBoardingValue(e.target.value);
     }
 
     const handleAdultsChange = (e) => {
@@ -57,17 +54,17 @@ function Home(){
                 }
             ]
         }
-        const url = "https://evening-ridge-73218.herokuapp.com/https://www.virginholidays.co.uk/cjs-search-api/search";
+        
+        const url = "/cjs-search-api/search";
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('Accept', 'application/json');
-        headers.append('Origin','*');
-        headers.append('Access-Control-Allow-Origin', 'http://localhost:3000');
     
         axios.post(url, payload, {headers: headers})
         .then((response) => {
             setLoading(false);
-            return setHolidaysData([response])
+            const holidaysList = response['data']['holidays'];
+            return setHolidaysData([holidaysList]);
         })
         .catch((err) => {
             setLoading(false);
@@ -85,24 +82,43 @@ function Home(){
         <div className="home-container">
             <div className="home-select-container">
                 <div>
-                    <Dropdown title={"Boarding Type"} onChange={handleBoardingChange} allOption={boardingOptions}/>
+                    <Input 
+                    id="hotel_input_id" 
+                    value={boardingValue} 
+                    title={"Boarding Type"} 
+                    disabled="disabled"
+                    />
                 </div>
                 <div>
-                    <Dropdown className="home-location-width" title={"Location"} onChange={handleLocationChange} allOption={locationOptions}/>
+                    <Dropdown 
+                    className="home-location-width" 
+                    title={"Location"} 
+                    onChange={handleLocationChange} 
+                    allOption={locationOptions}
+                    />
                 </div>
-                    <Dropdown title={"Adults"} onChange={handleAdultsChange} allOption={adultsOptions}/>
-                    <Dropdown title={"Infants"} onChange={handleInfantsChange} allOption={infantsOptions}/>
+                    <Dropdown 
+                    title={"Adults"} 
+                    onChange={handleAdultsChange} 
+                    allOption={adultsOptions}
+                    />
+                    <Dropdown 
+                    title={"Infants"} 
+                    onChange={handleInfantsChange} 
+                    allOption={infantsOptions}
+                    />
                 <div>
                     <span><h3>Checkin date</h3></span>
-                    <DatePicker className="home-datePicker" 
-                                selected={checkInDate} 
-                                onChange={(date) => setCheckInDate(date)}
-                                minDate={moment().toDate()}
-                                popperPlacement="left"
+                    <DatePicker 
+                    className="home-datePicker" 
+                    selected={checkInDate} 
+                    onChange={(date) => setCheckInDate(date)}
+                    minDate={moment().toDate()}
+                    popperPlacement="left"
                     />
                 </div>
                 <div className="home-search-margin">
-                    <SearchButton title={"Search"} onClick={handleSearch}/>
+                    <Button title={"Search"} onClick={handleSearch}/>
                 </div>
             </div>
         </div>
@@ -114,8 +130,7 @@ function Home(){
                     <div>
                         {holidaysData.length >= 1
                             ? (
-                                <HotelDetails hotels={(holidaysData[0] && holidaysData[0].data &&
-                                    holidaysData[0].data.holidays) || []} />
+                                <HotelDetails hotels={holidaysData[0] || []} />
                             )
                             :
                             <>{error && <div className="home-error-message">{`${error}, Please fill all details to proceed!`}</div>}</>

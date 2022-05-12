@@ -2,6 +2,7 @@
   "name": "travel-virgi",
   "version": "0.1.0",
   "private": true,
+  "proxy": "https://www.virginholidays.co.uk",
   "dependencies": {
     "@hookform/resolvers": "^2.8.8",
     "axios": "^0.27.2",

@@ -1,9 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import SearchButton from '../components/SearchButton';
+import Button from './Button';
 
 it("Should find search button", () => {
-    render(<SearchButton />);
+    render(<Button />);
     const buttonElement = screen.getByRole('button');
     expect(buttonElement).toHaveClass('search-button');
 });

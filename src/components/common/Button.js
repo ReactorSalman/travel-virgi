@@ -1,7 +1,7 @@
 import React from 'react';
-import "./SearchButton.css";
+import "./Button.css";
 
-function SearchButton(props){
+function Button(props){
     return(
         <div>
             <button onClick={props.onClick} className="search-button">
@@ -11,4 +11,4 @@ function SearchButton(props){
     )
 }
 
-export default SearchButton;
+export default Button;

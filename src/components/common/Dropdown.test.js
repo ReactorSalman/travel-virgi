@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import Dropdown from '../components/Dropdown';
+import Dropdown from './Dropdown';
 
 it("renders select option", () => {
     render(<Dropdown />);
