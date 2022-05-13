@@ -1,19 +1,24 @@
-const locationOptions = [
+export interface OptionsType {
+    label: string;
+    value: string;
+};
+
+const locationOptions: OptionsType[] = [
     {label: "new-york", value: "new-york"},
     {label: "orlando", value: "orlando"}, 
     {label: "barbados", value: "barbados"}, 
     {label: "toronto", value: "toronto"},
 ];
 
-const boardingOptions = [{label: "hotel", value: "hotel"},];
+const boardingOptions: OptionsType[] = [{label: "hotel", value: "hotel"},];
 
-const adultsOptions = [
+const adultsOptions: OptionsType[] = [
     {label: "1", value: "1"}, 
     {label: "2", value: "2"}, 
     {label: "3", value: "3"},
 ];
 
-const infantsOptions = [
+const infantsOptions: OptionsType[] = [
     {label: "0", value: "0"}, 
     {label: "1", value: "1"}, 
     {label: "2", value: "2"},

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import Home from '../components/Home';
+import Home from './Home';
 
 it("Should find header", () => {
     render(<Home />);

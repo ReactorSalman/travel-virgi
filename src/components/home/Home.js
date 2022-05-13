@@ -1,35 +1,73 @@
-import React, { useState } from 'react';
-import Dropdown from './common/Dropdown';
-import Button from './common/Button';
-import Input from './common/Input';
+import React, { useEffect, useState } from 'react';
+import Dropdown from '../common/Dropdown';
+import Button from '../common/Button';
+import InputField from '../common/InputField';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
 import moment from 'moment';
 import './Home.css';
-import {locationOptions, boardingOptions, adultsOptions, infantsOptions} from "../constants";
-const HotelDetails = React.lazy(() => import("./HotelDetails"));
+import {locationOptions, adultsOptions, infantsOptions} from "../../helpers";
+import ErrorContainer from '../common/ErrorContainer';
+const HotelDetails = React.lazy(() => import("../hotelview/HotelDetails"));
 
 
-function Home(){
+const Home = () => {
     let date = new Date();
     date.setDate(date.getDate() + 1);
     const [locationValue, setLocationValue] = useState('');
+    const [locationInputError, setLocationInputError] = useState('');
     const [boardingValue, setBoardingValue] = useState('hotel');
     const [adultsValue, setAdultsValue] = useState('');
+    const [adultsInputError, setAdultsInputError] = useState('');
     const [infantsValue, setInfantsValue] = useState('');
     const [checkInDate, setCheckInDate] = useState(date);
     const [holidaysData, setHolidaysData] = useState([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(true);
 
+
+    // const handleChange = (e) => {
+    //     if(e.target.id === "location_dropdown"){
+    //         setLocationValue(e.target.value);
+    //     }
+
+    //     if(e.target.id === "adults_dropdown"){
+    //         setAdultsValue(e.target.value);
+    //     }
+
+    //     if(e.target.id === "infants_dropdown"){
+    //         setInfantsValue(e.target.value);
+    //     }
+
+    //     if(locationValue.length > 0 && adultsValue.length > 0 && infantsValue.length > 0){
+    //         setIsDisabled(false);
+    //     }else{
+    //         setIsDisabled(true);
+    //     }
+    // }
 
     const handleLocationChange = (e) => {
         setLocationValue(e.target.value);
+        if(e.target.value.length > 0){
+            setIsDisabled(false);
+            setLocationInputError('')
+        }else{
+            setIsDisabled(true);
+            setLocationInputError('Please select location.')
+        }
     }
 
     const handleAdultsChange = (e) => {
         setAdultsValue(e.target.value);
+        if(e.target.value.length > 0){
+            setIsDisabled(false);
+            setAdultsInputError('')
+        }else{
+            setIsDisabled(true);
+            setAdultsInputError('Please select Adults.')
+        }
     }
 
     const handleInfantsChange = (e) => {
@@ -82,31 +120,35 @@ function Home(){
         <div className="home-container">
             <div className="home-select-container">
                 <div>
-                    <Input 
+                    <InputField 
                     id="hotel_input_id" 
                     value={boardingValue} 
                     title={"Boarding Type"} 
-                    disabled="disabled"
+                    disabled={true}
                     />
                 </div>
-                <div>
-                    <Dropdown 
-                    className="home-location-width" 
+                <div> 
+                    <Dropdown
+                    id="location_dropdown"  
                     title={"Location"} 
-                    onChange={handleLocationChange} 
+                    onChange={(e) => handleLocationChange(e)} 
                     allOption={locationOptions}
                     />
+                <div>{locationInputError && <ErrorContainer error={locationInputError}/>}</div>
                 </div>
                     <Dropdown 
+                    id="adults_dropdown"
                     title={"Adults"} 
                     onChange={handleAdultsChange} 
                     allOption={adultsOptions}
                     />
                     <Dropdown 
+                    id="infants_dropdown"
                     title={"Infants"} 
                     onChange={handleInfantsChange} 
                     allOption={infantsOptions}
                     />
+                    <div>{adultsInputError && <ErrorContainer error={adultsInputError}/>}</div>
                 <div>
                     <span><h3>Checkin date</h3></span>
                     <DatePicker 
@@ -118,7 +160,7 @@ function Home(){
                     />
                 </div>
                 <div className="home-search-margin">
-                    <Button title={"Search"} onClick={handleSearch}/>
+                    <Button id="home_button" title={"Search"} onClick={handleSearch} disabled={isDisabled}/>
                 </div>
             </div>
         </div>

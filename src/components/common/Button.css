@@ -31,7 +31,12 @@
     background-size: .65em auto, 100%;
 }
 
-.search-button:hover {
-    background: purple;
-    color: white;
+.search-button:disabled {
+    background: #cccccc;
+    color: #666666;
+}
+
+.search-button:enabled {
+    background: #ffffff;
+    color: #666666;
 }

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import './HotelDetails.css';
-import {ratings, pricePerPerson, facilities} from "../constants";
+import {ratings, pricePerPerson, facilities} from "../../helpers";
 
 function HotelDetails({hotels}){
 
