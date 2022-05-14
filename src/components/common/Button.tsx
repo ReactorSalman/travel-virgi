@@ -1,23 +1,25 @@
 import React from 'react';
 import "./Button.css";
+import Title from './Title';
 
 interface ButtonProps {
     id: string;
-    title: string;
     disabled: boolean;
+    className: string;
     onClick: React.MouseEventHandler<HTMLButtonElement>;
+    
 };
 
-const Button = ({ id, title, disabled, onClick } : ButtonProps) => {
+const Button = ({ id, disabled, className, onClick } : ButtonProps) => {
     return(
         <div>
             <button
                 id={id}
-                className="search-button"
-                onClick={onClick}  
+                className={className}
+                onClick={onClick}
                 disabled={disabled}
             >
-                {title}
+                <Title title='Search' className='' />
             </button>
         </div>
     )

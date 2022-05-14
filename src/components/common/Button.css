@@ -1,8 +1,6 @@
 .search-button {
     position: relative;
-    position: sticky;
     background: white;
-    padding: 4%;
     cursor: pointer;
     font-size: 17px;
     transition: all 0.5s;
@@ -18,7 +16,7 @@
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
-    margin-top: 63%;
+    margin-top: 20px;
     border: 1px solid #b393d0;
     box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.4);
     border-radius: .5em;
@@ -34,10 +32,7 @@
 .search-button:disabled {
     background: #cccccc;
     color: #666666;
-}
-
-.search-button:disabled:hover{
-    color: #b393d0;
+    cursor: auto;
 }
 
 .search-button:enabled {

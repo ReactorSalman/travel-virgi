@@ -1,23 +1,20 @@
 import React from 'react';
 
 interface InputProps{
-	title: string;
 	id: string;
 	value: string;
 	disabled: boolean;
+	className: string;
 };
 
-const InputField = ({ title, id, value, disabled } : InputProps) => {
+const InputField = ({ id, value, disabled, className } : InputProps) => {
 	return(
-		<div>
-		{title}
 		<input
 			id={id}
-			type="input"
+			className={className}
 			value={value}
 			disabled={disabled}
 		/>
-		</div>
 	);
 }
 
