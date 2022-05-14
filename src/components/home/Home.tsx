@@ -71,8 +71,8 @@ function Home() {
 		<div>
 			<Header header='Travel Veergi' className='navbar navbar-expand-lg navbar-light px-3 header-container' />
 			<div className='px-5'>
-				<div className='home-select-container mt-5'>
-					<div className='row'>
+				<div className='home-select-container border rounded mt-3'>
+					<div className='row mx-auto'>
 						<div className='col-sm'>
 							<Title title='Booking Type' className='form-label text-dark' />
 							<InputField
@@ -125,7 +125,7 @@ function Home() {
 							/>
 						</div>
 						<div className='col-sm'>
-							<Button id='home_button' className="btn btn-outline-light my-2 my-sm-4" onClick={handleSearch} disabled={isDisabled} />
+							<Button id='home_button' className="btn btn-outline-light" onClick={handleSearch} disabled={isDisabled} />
 						</div>
 					</div>
 				</div>
@@ -135,13 +135,13 @@ function Home() {
 					<div className='home-loader'></div>
 				</>
 			) : (
-				<div>
+				<div className=''>
 					{holidaysData.length >= 1
 						? (
 							<HotelDetails hotels={holidaysData[0] || []} />
 						)
 						:
-						<>{error && <div className='home-error-message'><ErrorContainer error={error} className='text-danger' /></div>}</>
+						<h4>{error && <ErrorContainer error={error} className='text-danger text-center' />}</h4>
 					}
 				</div>
 			)}

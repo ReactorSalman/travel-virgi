@@ -8,10 +8,9 @@
 .home-select-container {
     justify-content: space-between;
     background-image: linear-gradient(45deg, #e3f2ff, #b393d3);
-    padding: 3%;
+    padding: 2%;
     color: white;
-    margin-top: 5%;
-    border-radius: 3em;
+    margin-top: 1%;
 }
 
 .home-loader {
@@ -45,4 +44,12 @@
     width: 100%;
     max-width: 100%;
     margin: 0;
+}
+
+#home_button {
+    height: 32px;
+    padding: 1px;
+    width: 100px;
+    margin-top: 26px;
+    margin-left: 50px;
 }
