@@ -36,6 +36,10 @@
     color: #666666;
 }
 
+.search-button:disabled:hover{
+    color: #b393d0;
+}
+
 .search-button:enabled {
     background: #ffffff;
     color: #666666;

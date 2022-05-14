@@ -27,52 +27,16 @@ const Home = () => {
     const [loading, setLoading] = useState(false);
     const [isDisabled, setIsDisabled] = useState(true);
 
-
-    // const handleChange = (e) => {
-    //     if(e.target.id === "location_dropdown"){
-    //         setLocationValue(e.target.value);
-    //     }
-
-    //     if(e.target.id === "adults_dropdown"){
-    //         setAdultsValue(e.target.value);
-    //     }
-
-    //     if(e.target.id === "infants_dropdown"){
-    //         setInfantsValue(e.target.value);
-    //     }
-
-    //     if(locationValue.length > 0 && adultsValue.length > 0 && infantsValue.length > 0){
-    //         setIsDisabled(false);
-    //     }else{
-    //         setIsDisabled(true);
-    //     }
-    // }
-
-    const handleLocationChange = (e) => {
-        setLocationValue(e.target.value);
-        if(e.target.value.length > 0){
+    useEffect(() => {
+        console.log(locationValue)
+        console.log(adultsValue);
+        console.log(infantsValue);
+        if(locationValue.length > 0 && adultsValue.length > 0 && infantsValue.length > 0){
             setIsDisabled(false);
-            setLocationInputError('')
         }else{
             setIsDisabled(true);
-            setLocationInputError('Please select location.')
-        }
-    }
-
-    const handleAdultsChange = (e) => {
-        setAdultsValue(e.target.value);
-        if(e.target.value.length > 0){
-            setIsDisabled(false);
-            setAdultsInputError('')
-        }else{
-            setIsDisabled(true);
-            setAdultsInputError('Please select Adults.')
-        }
-    }
-
-    const handleInfantsChange = (e) => {
-        setInfantsValue(e.target.value);
-    }
+        };
+    }, [locationValue, adultsValue, infantsValue]);
 
     const handleSearch = () => {
         setLoading(true);
@@ -131,22 +95,25 @@ const Home = () => {
                     <Dropdown
                     id="location_dropdown"  
                     title={"Location"} 
-                    onChange={(e) => handleLocationChange(e)} 
+                    onChange={(e) => setLocationValue(e.target.value)} 
                     allOption={locationOptions}
+                    required={true}
                     />
                 <div>{locationInputError && <ErrorContainer error={locationInputError}/>}</div>
                 </div>
                     <Dropdown 
                     id="adults_dropdown"
                     title={"Adults"} 
-                    onChange={handleAdultsChange} 
+                    onChange={(e) => setAdultsValue(e.target.value)} 
                     allOption={adultsOptions}
+                    required={true}
                     />
                     <Dropdown 
                     id="infants_dropdown"
                     title={"Infants"} 
-                    onChange={handleInfantsChange} 
+                    onChange={(e) => setInfantsValue(e.target.value)} 
                     allOption={infantsOptions}
+                    required={true}
                     />
                     <div>{adultsInputError && <ErrorContainer error={adultsInputError}/>}</div>
                 <div>

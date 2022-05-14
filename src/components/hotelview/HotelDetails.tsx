@@ -1,15 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import './HotelDetails.css';
 import {ratings, pricePerPerson, facilities} from "../../helpers";
+import { PricePerPersonType } from '../../interfaces/HelperTypes';
 
-function HotelDetails({hotels}){
+const HotelDetails = ({hotels}: any) => {
 
-    const [selectedStars, setSelectedStars] = useState([]);
-    const [selectedPricePerPerson, setSelectedPricePerPerson] = useState([]);
-    const [selectedFacilities, setSelectedFacilities] = useState([]);
+    console.log(hotels)
+
+    const [selectedStars, setSelectedStars] = useState<any>([]);
+    const [selectedPricePerPerson, setSelectedPricePerPerson] = useState<any>([]);
+    const [selectedFacilities, setSelectedFacilities] = useState<any>([]);
 
 
-    const checkUnCheck = (prevSelections, currentSelection) => {
+    const checkUnCheck = (prevSelections: string[], currentSelection: string) => {
         if(prevSelections.includes(currentSelection)) {
             return prevSelections.filter(selection => selection !== currentSelection)
         } else {
@@ -17,7 +20,7 @@ function HotelDetails({hotels}){
         }
     };
     
-    const filterBy = (data, {type, value}) => {
+    const filterBy = (data: any[], {type, value}: { type: any; value: any[]; }) => {
         if(!value.length) return data;
         const filtered =  data.filter((item) => {
             if(type === "starRating"){
@@ -28,14 +31,14 @@ function HotelDetails({hotels}){
                 return minMaxes.find(([min, max]) => item.pricePerPerson > min && item.pricePerPerson < max)
             }
             if(type === "hotelFacilities"){
-                const availableFacilities =  item.hotel.content.hotelFacilities.filter((facility) => value.includes(facility));
+                const availableFacilities =  item.hotel.content.hotelFacilities.filter((facility: PricePerPersonType) => value.includes(facility));
                 return availableFacilities.length ===  value.length
             }
         })
         return filtered;
     };
 
-    const [filteredHotelDetails, setFilteredHotelDetails] = useState([]);
+    const [filteredHotelDetails, setFilteredHotelDetails] = useState<any>([]);
 
     useEffect(() => {
         const filterByStar = filterBy(hotels, {type: 'starRating', value: selectedStars});
@@ -57,7 +60,7 @@ function HotelDetails({hotels}){
                                 type="checkbox" 
                                 id={option.value}
                                 checked={selectedStars.includes(option.value)} 
-                                onChange={(e) => {setSelectedStars(prev => checkUnCheck(prev, e.target.id))}}
+                                onChange={(e) => {setSelectedStars((prev: string[]) => checkUnCheck(prev, e.target.id))}}
                             />
                         <span className="checkmark"></span>
                         </label>
@@ -72,7 +75,7 @@ function HotelDetails({hotels}){
                                 type="checkbox" 
                                 id={`${option.min}-${option.max}`}
                                 checked={selectedPricePerPerson.includes(`${option.min}-${option.max}`)}
-                                onChange={(e) => {setSelectedPricePerPerson(prev => checkUnCheck(prev, e.target.id))}}
+                                onChange={(e) => {setSelectedPricePerPerson((prev: string[]) => checkUnCheck(prev, e.target.id))}}
                             />
                         <span className="checkmark"></span>
                         </label>
@@ -87,7 +90,7 @@ function HotelDetails({hotels}){
                                 type="checkbox" 
                                 id={option.label}
                                 checked={selectedFacilities.includes(option.label)}
-                                onChange={(e) => {setSelectedFacilities(prev => checkUnCheck(prev, e.target.id))}}
+                                onChange={(e) => {setSelectedFacilities((prev: string[]) => checkUnCheck(prev, e.target.id))}}
                             />
                         <span className="checkmark"></span>
                         </label>
@@ -97,7 +100,7 @@ function HotelDetails({hotels}){
             </span>
             <main>
 			{filteredHotelDetails.length > 0 ? 
-				(<div> {filteredHotelDetails.map((hotelData, id) => (
+				(<div> {filteredHotelDetails.map((hotelData: any, id: any) => (
                     <div id="hotel-details-card" key={id}>
                         <div>
                             <div className="hotel-image">

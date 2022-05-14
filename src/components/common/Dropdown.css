@@ -35,6 +35,10 @@
     background-size: .65em auto, 100%;
 }
 
+.dropdown-select:required {
+    
+};
+
 .dropdown-select:hover {
     background-color: #fff;
 }

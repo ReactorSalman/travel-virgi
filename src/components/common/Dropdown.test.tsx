@@ -5,7 +5,7 @@ import Dropdown from './Dropdown';
 it("renders select option", () => {
     render(<Dropdown title={''} id={''} allOption={[]} onChange={function (event: React.ChangeEvent<HTMLSelectElement>): void {
         throw new Error('Function not implemented.');
-    } } />);
+    } } required={false} />);
     const optionElement = screen.getByText(/select/i);
     expect(optionElement).toBeInTheDocument;
 });
