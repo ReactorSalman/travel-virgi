@@ -1,17 +1,12 @@
-import axios, {AxiosRequestConfig} from "axios";
-import { HolidaysRequestPayload } from "../components/home/HomeTypes";
+import axios from "axios";
+import { HolidaysRequestType } from "../components/home/HomeTypes";
 
-export const getHolidays = ({ bookingType } : HolidaysRequestPayload) => {
-    const url = "/cjs-search-api/search";
-
-    const config: AxiosRequestConfig = {
-        method: "POST",
-        url: url,
-        headers: {
-            'Content-Type': 'application/json', 
-            'Accept': 'application/json'
-        },
-    }
-
-    return axios.create(config);
+export const getHolidays = (payload: HolidaysRequestType) => {
+	const url = "/cjs-search-api/search";
+	let response = axios.post(url, payload, {
+		headers: {
+			'Content-Type': 'application/json',
+		}
+	});
+	return response;
 }

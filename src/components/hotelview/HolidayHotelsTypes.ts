@@ -15,7 +15,7 @@ type Content = {
     starRating: string | number;
 };
 
-export type Hotel = {
+type Hotel = {
     id: string;
     name: string;
     content: Content;
@@ -34,7 +34,7 @@ export type HolidayHotelsType = {
 };
 
 export interface Hotels {
-    hotels: HolidayHotelsType;
+    hotels?: HolidayHotelsType;
 }
 
 // {

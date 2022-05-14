@@ -2,14 +2,14 @@ type PartyCompositions = {
     adults: number;
     childAges: any;
     infants: number;
-}
+};
 
-export type HolidaysRequestPayload = {
+export type HolidaysRequestType = {
     bookingType: string;
     location: string;
     departureDate: string;
+    duration: string;
     partyCompositions: PartyCompositions[]
 
-}
+};
 
-export type AxiosRequestHeaders = Record<string, string | number | boolean>;

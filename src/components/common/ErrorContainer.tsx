@@ -2,11 +2,12 @@ import React from 'react';
 
 interface ErrorProps {
     error: string;
+    className: string;
 };
 
-const ErrorContainer = ({error}: ErrorProps) => {
+const ErrorContainer = ({error, className}: ErrorProps) => {
     return (
-        <div>{error}</div>
+        <div className={className}>{error}</div>
     );
 }
 
