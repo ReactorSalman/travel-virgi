@@ -1,5 +1,4 @@
-import React from 'react';
-import { render, screen, fireEvent, getByLabelText } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import Home from './Home';
 
 it("Should find header", () => {

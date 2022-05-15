@@ -4,8 +4,6 @@ import Button from '../common/Button';
 import InputField from '../common/InputField';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import moment from 'moment';
-import './Home.css';
 import { locationOptions, adultsOptions, infantsOptions } from '../../helpers';
 import ErrorContainer from '../common/ErrorContainer';
 import Title from '../common/Title';
@@ -14,6 +12,8 @@ import { getHolidays } from "../../services";
 import { HolidaysRequestType } from "../../interfaces/HomeTypes";
 import HotelDetails from '../hotelview/HotelDetails';
 import { HolidayHotelsType } from '../../interfaces/HotelDetailsTypes';
+import moment from 'moment';
+import './Home.css';
 
 
 const Home: React.FC = () => {
@@ -59,12 +59,15 @@ const Home: React.FC = () => {
 		getHolidays(payload)
 			.then((response) => {
 				setLoading(false);
-				const holidaysList = response['data']['holidays'];
+				const holidaysList = response['data'] && response['data']['holidays'];
 				return setHolidaysData([holidaysList]);
 			})
 			.catch((err) => {
 				setLoading(false);
-				setError(err.response.data.errors[0]);
+				setError(err.response && err.response.data &&
+					err.response.data.errors &&
+					err.response.data.errors[0]
+				);
 			});
 	};
 
@@ -121,15 +124,17 @@ const Home: React.FC = () => {
 								selected={checkInDate}
 								onChange={(date: Date) => setCheckInDate(date)}
 								minDate={moment().toDate()}
+								closeOnScroll={true}
+								excludeDates={[new Date()]}
 								dateFormat="dd/MM/yyyy"
 							/>
 						</div>
 						<div className='col-sm'>
-							<Button 
-								id='home_button' 
-								className="btn btn-outline-light" 
-								onClick={handleSearch} 
-								disabled={isButtonDisabled} 
+							<Button
+								id='home_button'
+								className="btn btn-outline-light"
+								onClick={handleSearch}
+								disabled={isButtonDisabled}
 							/>
 						</div>
 					</div>
@@ -146,7 +151,7 @@ const Home: React.FC = () => {
 							<HotelDetails hotels={holidaysData[0] || []} />
 						)
 						:
-						<h4>{error && <ErrorContainer label={error} className='text-danger text-center mt-3'/>}</h4>
+						<h4>{error && <ErrorContainer label={error} className='text-danger text-center mt-3' />}</h4>
 					}
 				</div>
 			)}
