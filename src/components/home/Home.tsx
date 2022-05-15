@@ -64,7 +64,7 @@ const Home: React.FC = () => {
 			})
 			.catch((err) => {
 				setLoading(false);
-				setError(err.message);
+				setError(err.response.data.errors[0]);
 			});
 	};
 
@@ -146,7 +146,7 @@ const Home: React.FC = () => {
 							<HotelDetails hotels={holidaysData[0] || []} />
 						)
 						:
-						<h4>{error && <ErrorContainer label={error} className='text-danger text-center' />}</h4>
+						<h4>{error && <ErrorContainer label={error} className='text-danger text-center mt-3'/>}</h4>
 					}
 				</div>
 			)}

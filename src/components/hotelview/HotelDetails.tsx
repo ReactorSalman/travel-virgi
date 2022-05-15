@@ -128,7 +128,7 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 								</div>
 							))}
 							</div>) : (
-								<h4><ErrorContainer label={"No hotels found!"} className='text-danger text-center' /></h4>
+								<h4><ErrorContainer label={"No hotels found!"} className='text-danger text-center mt-3' /></h4>
 							)}
 					</div>
 				</div>

@@ -15,19 +15,6 @@
 	text-overflow: clip;
 }
 
-.hotel-review-price-details {
-	margin-top: 20px;
-	text-align: right;
-	position: relative;
-}
-
-.see-description {
-	position: relative;
-	margin-top: 10px;
-	color: #b393d3;
-	text-align: right;
-}
-
 .checkbox-container {
 	display: block;
 	position: relative;
@@ -98,15 +85,4 @@
 .price-align {
 	margin-left: 35px;
 	margin-top: 50px;
-}
-
-
-.hotel-not-found {
-	display: flex;
-	flex-shrink: 0;
-	margin-left: 20%;
-	font-size: 50px;
-	color: #8B0000;
-	font-family: 'Fira Sans', serif;
-	text-align: justify;
 }
