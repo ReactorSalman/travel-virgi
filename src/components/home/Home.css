@@ -22,7 +22,6 @@
 	animation: spin 0.5s linear infinite;
 	margin-left: auto;
 	margin-right: auto;
-
 }
 
 @keyframes spin {
@@ -36,19 +35,18 @@
 }
 
 .dropdown-select {
-	background: white;
-	height: 32px;
+	height: 31px;
 	cursor: pointer;
-	font-size: 17px;
 	transition: all 0.5s;
 	text-indent: 1px;
 	font-family: sans-serif;
 	font-weight: 200;
-	color: #444;
 	line-height: 1.3;
 	width: 100%;
 	max-width: 100%;
 	margin: 0;
+	padding: 5px;
+	-webkit-appearance: none;
 }
 
 #home_button {

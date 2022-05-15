@@ -27,13 +27,13 @@ function Home() {
 	const [holidaysData, setHolidaysData] = useState<any>([]);
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
-	const [isDisabled, setIsDisabled] = useState(true);
+	const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
 	useEffect(() => {
 		if (locationValue.length > 0 && adultsValue.length > 0 && infantsValue.length > 0) {
-			setIsDisabled(false);
+			setIsButtonDisabled(false);
 		} else {
-			setIsDisabled(true);
+			setIsButtonDisabled(true);
 		};
 	}, [locationValue, adultsValue, infantsValue]);
 
@@ -88,7 +88,7 @@ function Home() {
 							<span className='text-danger'>*</span>
 							<Dropdown
 								id='location_dropdown'
-								className='dropdown-select mt-1'
+								className='dropdown-select border-0 mt-1'
 								onChange={(e) => setLocationValue(e.target.value)}
 								allOption={locationOptions}
 							/>
@@ -98,7 +98,7 @@ function Home() {
 							<span className='text-danger'>*</span>
 							<Dropdown
 								id='adults_dropdown'
-								className='dropdown-select mt-1'
+								className='dropdown-select border-0 mt-1'
 								onChange={(e) => setAdultsValue(e.target.value)}
 								allOption={adultsOptions}
 							/>
@@ -108,7 +108,7 @@ function Home() {
 							<span className='text-danger'>*</span>
 							<Dropdown
 								id='infants_dropdown'
-								className='dropdown-select mt-1'
+								className='dropdown-select border-0 bg-white mt-1'
 								onChange={(e) => setInfantsValue(e.target.value)}
 								allOption={infantsOptions}
 							/>
@@ -117,7 +117,7 @@ function Home() {
 							<Title title='Checkin date' className='form-label text-dark' />
 							<span className='text-danger'>*</span>
 							<DatePicker
-								className='form-control form-control-sm mt-1'
+								className='form-control form-control-sm mt-1 border-0'
 								selected={checkInDate}
 								onChange={(date: Date) => setCheckInDate(date)}
 								minDate={moment().toDate()}
@@ -125,7 +125,7 @@ function Home() {
 							/>
 						</div>
 						<div className='col-sm'>
-							<Button id='home_button' className="btn btn-outline-light" onClick={handleSearch} disabled={isDisabled} />
+							<Button id='home_button' className="btn btn-outline-light" onClick={handleSearch} disabled={isButtonDisabled} />
 						</div>
 					</div>
 				</div>
