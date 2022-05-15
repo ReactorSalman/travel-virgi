@@ -1,5 +1,5 @@
 import axios from "axios";
-import { HolidaysRequestType } from "../components/home/HomeTypes";
+import { HolidaysRequestType } from "../interfaces/HomeTypes";
 
 export const getHolidays = (payload: HolidaysRequestType) => {
 	const url = "/cjs-search-api/search";

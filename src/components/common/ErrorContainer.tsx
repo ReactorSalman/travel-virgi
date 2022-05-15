@@ -1,13 +1,9 @@
 import React from 'react';
+import { CommonProps } from '../../interfaces/CommonTypes';
 
-interface ErrorProps {
-	error: string;
-	className: string;
-};
-
-const ErrorContainer = ({ error, className }: ErrorProps) => {
+const ErrorContainer = ({ label, className }: CommonProps) => {
 	return (
-		<div className={className}>{error}</div>
+		<div className={className}>{label}</div>
 	);
 }
 

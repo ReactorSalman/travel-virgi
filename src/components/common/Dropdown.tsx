@@ -1,12 +1,5 @@
 import React from 'react';
-import { OptionsType } from "../../helpers/HelperTypes";
-
-interface DropdownProps {
-	id: string;
-	allOption: OptionsType[];
-	className: string;
-	onChange: React.ChangeEventHandler<HTMLSelectElement>;
-};
+import { DropdownProps } from '../../interfaces/CommonTypes';
 
 const Dropdown = ({ id, allOption, className, onChange }: DropdownProps) => {
 	let list = allOption && allOption.map((opt, i) => {

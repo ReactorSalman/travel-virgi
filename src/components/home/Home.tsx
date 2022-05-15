@@ -11,20 +11,20 @@ import ErrorContainer from '../common/ErrorContainer';
 import Title from '../common/Title';
 import Header from '../common/Header';
 import { getHolidays } from "../../services";
-import { HolidaysRequestType } from "./HomeTypes";
+import { HolidaysRequestType } from "../../interfaces/HomeTypes";
 import HotelDetails from '../hotelview/HotelDetails';
-// import { HolidayHotelsType } from '../hotelview/HotelDetailsTypes';
+import { HolidayHotelsType } from '../../interfaces/HotelDetailsTypes';
 
 
-function Home() {
+const Home: React.FC = () => {
 	let date = new Date();
 	date.setDate(date.getDate() + 1);
+
 	const [locationValue, setLocationValue] = useState('');
-	const [bookingValue, setBookingValue] = useState('hotel');
 	const [adultsValue, setAdultsValue] = useState('');
 	const [infantsValue, setInfantsValue] = useState('');
 	const [checkInDate, setCheckInDate] = useState(date);
-	const [holidaysData, setHolidaysData] = useState<any>([]);
+	const [holidaysData, setHolidaysData] = useState<HolidayHotelsType[][]>([]);
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [isButtonDisabled, setIsButtonDisabled] = useState(true);
@@ -43,7 +43,7 @@ function Home() {
 		const adultsValueToNumber = Number(adultsValue);
 		const infantValueToNumber = Number(infantsValue);
 		const payload: HolidaysRequestType = {
-			'bookingType': bookingValue,
+			'bookingType': 'hotel',
 			'location': locationValue,
 			'departureDate': dateWrapper,
 			'duration': '7',
@@ -70,21 +70,21 @@ function Home() {
 
 	return (
 		<div>
-			<Header header='Travel Veergi' className='navbar navbar-expand-lg navbar-light px-3 header-container' />
+			<Header label='Travel Veergi' className='navbar navbar-expand-lg navbar-light px-3 header-container' />
 			<div className='px-5'>
 				<div className='home-select-container rounded mt-3'>
 					<div className='row mx-auto'>
 						<div className='col-sm'>
-							<Title title='Booking Type' className='form-label text-dark' />
+							<Title label='Booking Type' className='form-label text-dark' />
 							<InputField
 								id='hotel_input_id'
 								className='form-control form-control-sm mt-1'
-								value={bookingValue}
+								value={'hotel'}
 								disabled={true}
 							/>
 						</div>
 						<div className='col-sm'>
-							<Title title='Location' className='form-label text-dark' />
+							<Title label='Location' className='form-label text-dark' />
 							<span className='text-danger'>*</span>
 							<Dropdown
 								id='location_dropdown'
@@ -94,7 +94,7 @@ function Home() {
 							/>
 						</div>
 						<div className='col-sm'>
-							<Title title='Adults' className='form-label text-dark' />
+							<Title label='Adults' className='form-label text-dark' />
 							<span className='text-danger'>*</span>
 							<Dropdown
 								id='adults_dropdown'
@@ -104,7 +104,7 @@ function Home() {
 							/>
 						</div>
 						<div className='col-sm'>
-							<Title title='Infants' className='form-label text-dark' />
+							<Title label='Infants' className='form-label text-dark' />
 							<span className='text-danger'>*</span>
 							<Dropdown
 								id='infants_dropdown'
@@ -114,7 +114,7 @@ function Home() {
 							/>
 						</div>
 						<div className='col-sm'>
-							<Title title='Checkin date' className='form-label text-dark' />
+							<Title label='Checkin date' className='form-label text-dark' />
 							<span className='text-danger'>*</span>
 							<DatePicker
 								className='form-control form-control-sm mt-1 border-0'
@@ -141,7 +141,7 @@ function Home() {
 							<HotelDetails hotels={holidaysData[0] || []} />
 						)
 						:
-						<h4>{error && <ErrorContainer error={error} className='text-danger text-center' />}</h4>
+						<h4>{error && <ErrorContainer label={error} className='text-danger text-center' />}</h4>
 					}
 				</div>
 			)}

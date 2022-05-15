@@ -1,13 +1,9 @@
 import React from 'react';
+import { CommonProps } from '../../interfaces/CommonTypes';
 
-interface TitleProp {
-	title: string;
-	className: string;
-}
-
-const Title = ({ title, className }: TitleProp) => {
+const Title = ({ label, className }: CommonProps) => {
 	return (
-		<span className={className}>{title}</span>
+		<span className={className}>{label}</span>
 	);
 }
 

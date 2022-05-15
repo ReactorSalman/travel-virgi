@@ -1,13 +1,6 @@
 import React from 'react';
+import { ButtonProps } from '../../interfaces/CommonTypes';
 import Title from './Title';
-
-interface ButtonProps {
-	id: string;
-	disabled: boolean;
-	className: string;
-	onClick: React.MouseEventHandler<HTMLButtonElement>;
-
-};
 
 const Button = ({ id, disabled, className, onClick }: ButtonProps) => {
 	return (
@@ -18,7 +11,7 @@ const Button = ({ id, disabled, className, onClick }: ButtonProps) => {
 				onClick={onClick}
 				disabled={disabled}
 			>
-				<Title title='Search' className='' />
+				<Title label='Search' className='' />
 			</button>
 		</div>
 	)

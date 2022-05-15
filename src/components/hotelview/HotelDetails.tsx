@@ -4,7 +4,7 @@ import { ratings, pricePerPerson, facilities } from '../../helpers';
 // import { PricePerPersonType } from '../../helpers/HelperTypes';
 import Title from '../common/Title';
 import ErrorContainer from '../common/ErrorContainer';
-import { HolidayHotelsType, Hotels } from './HotelDetailsTypes';
+import { HolidayHotelsType, Hotels } from '../../interfaces/HotelDetailsTypes';
 
 const HotelDetails = ({ hotels }: Hotels) => {
 
@@ -53,10 +53,10 @@ const HotelDetails = ({ hotels }: Hotels) => {
 		<div className='container'>
 			<div className='row'>
 				<div className='col-3 filter-container mt-3'>
-					<h3><Title className='' title='Filter by:' /></h3>
+					<h3><Title className='' label='Filter by:' /></h3>
 					<div className=''>
 						<div>
-							<h5><Title className='' title='Star rating' /></h5>
+							<h5><Title className='' label='Star rating' /></h5>
 							{ratings.map((option) => (
 								<label className='checkbox-container' key={`star${option.value}`}>{option.label}
 									<input
@@ -72,7 +72,7 @@ const HotelDetails = ({ hotels }: Hotels) => {
 					</div>
 
 					<div>
-						<h5><Title className='' title='Price per person' /></h5>
+						<h5><Title className='' label='Price per person' /></h5>
 						{pricePerPerson.map((option) => (
 							<label className='checkbox-container' key={`price${option.value}`}>{option.label}
 								<input
@@ -87,7 +87,7 @@ const HotelDetails = ({ hotels }: Hotels) => {
 					</div>
 
 					<div>
-						<h5><Title className='' title='Hotel facilities' /></h5>
+						<h5><Title className='' label='Hotel facilities' /></h5>
 						{facilities.map((option) => (
 							<label className='checkbox-container' key={`facility${option.value}`}>{option.label}
 								<input
@@ -118,7 +118,7 @@ const HotelDetails = ({ hotels }: Hotels) => {
 									<div className='col'>
 										<Title
 											className='hotel-name'
-											title={hotelData && hotelData.hotel && hotelData.hotel.name}
+											label={hotelData && hotelData.hotel && hotelData.hotel.name}
 										/>
 										<div className='hotel-descprition'>{hotelData.hotel.content.hotelDescription}</div>
 									</div>
@@ -150,7 +150,7 @@ const HotelDetails = ({ hotels }: Hotels) => {
 								</div>
 							))}
 							</div>) : (
-								<h4><ErrorContainer error={"No hotels found!"} className='text-danger text-center' /></h4>
+								<h4><ErrorContainer label={"No hotels found!"} className='text-danger text-center' /></h4>
 							)}
 					</div>
 				</div>

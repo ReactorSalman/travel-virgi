@@ -1,4 +1,4 @@
-import { OptionsType, RatingAndFacilitiesType, PricePerPersonType } from "./HelperTypes";
+import { OptionsType, RatingAndFacilitiesType, PricePerPersonType } from "../interfaces/HelperTypes";
 
 const locationOptions: OptionsType[] = [
 	{ label: "new-york", value: "new-york" },

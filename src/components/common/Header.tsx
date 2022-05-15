@@ -1,13 +1,9 @@
 import React from 'react';
+import { CommonProps } from '../../interfaces/CommonTypes';
 
-interface HeaderProps {
-	header: string;
-	className: string;
-};
-
-const Header = ({ header, className }: HeaderProps) => {
+const Header = ({ label, className }: CommonProps) => {
 	return (
-		<nav className={className}>{header}</nav>
+		<nav className={className}>{label}</nav>
 	);
 };
 

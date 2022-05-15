@@ -1,11 +1,5 @@
 import React from 'react';
-
-interface InputProps {
-	id: string;
-	value: string;
-	disabled: boolean;
-	className: string;
-};
+import { InputProps } from '../../interfaces/CommonTypes';
 
 const InputField = ({ id, value, disabled, className }: InputProps) => {
 	return (
