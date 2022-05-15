@@ -2,7 +2,7 @@ import React from 'react';
 import { ButtonProps } from '../../interfaces/CommonTypes';
 import Title from './Title';
 
-const Button = ({ id, disabled, className, onClick }: ButtonProps) => {
+const Button: React.FC<ButtonProps> = ({ id, disabled, className, onClick }: ButtonProps) => {
 	return (
 		<div>
 			<button

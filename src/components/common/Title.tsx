@@ -1,7 +1,7 @@
 import React from 'react';
 import { CommonProps } from '../../interfaces/CommonTypes';
 
-const Title = ({ label, className }: CommonProps) => {
+const Title: React.FC<CommonProps> = ({ label, className }: CommonProps) => {
 	return (
 		<span className={className}>{label}</span>
 	);

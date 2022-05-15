@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './HotelDetails.css';
 import { ratings, pricePerPerson, facilities } from '../../helpers';
-// import { PricePerPersonType } from '../../helpers/HelperTypes';
 import Title from '../common/Title';
 import ErrorContainer from '../common/ErrorContainer';
 import { HolidayHotelsType, Hotels } from '../../interfaces/HotelDetailsTypes';
 
-const HotelDetails = ({ hotels }: Hotels) => {
+const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 
 	const [selectedStars, setSelectedStars] = useState<string[]>([]);
 	const [selectedPricePerPerson, setSelectedPricePerPerson] = useState<string[]>([]);
@@ -47,7 +46,7 @@ const HotelDetails = ({ hotels }: Hotels) => {
 		const filterByStarPrice = filterBy(filterByStar, { type: 'pricePerPerson', value: selectedPricePerPerson });
 		const filterByStarPriceFacility = filterBy(filterByStarPrice, { type: 'hotelFacilities', value: selectedFacilities });
 		setFilteredHotelDetails([...filterByStarPriceFacility]);
-	}, [selectedStars, selectedPricePerPerson, selectedFacilities]);
+	}, [selectedStars, selectedPricePerPerson, selectedFacilities, hotels]);
 
 	return (
 		<div className='container'>

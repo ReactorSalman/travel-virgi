@@ -1,7 +1,7 @@
 import React from 'react';
 import { DropdownProps } from '../../interfaces/CommonTypes';
 
-const Dropdown = ({ id, allOption, className, onChange }: DropdownProps) => {
+const Dropdown : React.FC<DropdownProps> = ({ id, allOption, className, onChange }: DropdownProps) => {
 	let list = allOption && allOption.map((opt, i) => {
 		return <option key={i} value={opt.value}>{opt.label}</option>
 	});
