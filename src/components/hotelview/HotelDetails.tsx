@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import './HotelDetails.css';
 import { ratings, pricePerPerson, facilities } from '../../helpers';
-import { PricePerPersonType } from '../../helpers/HelperTypes';
+// import { PricePerPersonType } from '../../helpers/HelperTypes';
 import Title from '../common/Title';
 import ErrorContainer from '../common/ErrorContainer';
+import { HolidayHotelsType, Hotels } from './HotelDetailsTypes';
 
-const HotelDetails = ({ hotels }: any) => {
+const HotelDetails = ({ hotels }: Hotels) => {
 
-	const [selectedStars, setSelectedStars] = useState<any>([]);
-	const [selectedPricePerPerson, setSelectedPricePerPerson] = useState<any>([]);
-	const [selectedFacilities, setSelectedFacilities] = useState<any>([]);
+	const [selectedStars, setSelectedStars] = useState<string[]>([]);
+	const [selectedPricePerPerson, setSelectedPricePerPerson] = useState<string[]>([]);
+	const [selectedFacilities, setSelectedFacilities] = useState<string[]>([]);
 
 
 	const checkUnCheck = (prevSelections: string[], currentSelection: string) => {
@@ -20,25 +21,26 @@ const HotelDetails = ({ hotels }: any) => {
 		}
 	};
 
-	const filterBy = (data: any[], { type, value }: { type: any; value: any[]; }) => {
+	const filterBy = (data: HolidayHotelsType[], { type, value }: { type: string; value: string[]; }) => {
 		if (!value.length) return data;
 		const filtered = data.filter((item) => {
 			if (type === 'starRating') {
 				return value.includes(item.hotel.content.starRating);
-			}
+			};
 			if (type === 'pricePerPerson') {
 				const minMaxes = value.map(v => v.split('-'));
-				return minMaxes.find(([min, max]) => item.pricePerPerson > min && item.pricePerPerson < max)
-			}
+				return minMaxes.find(([min, max]) => item.pricePerPerson > Number(min) && item.pricePerPerson < Number(max))
+			};
 			if (type === 'hotelFacilities') {
-				const availableFacilities = item.hotel.content.hotelFacilities.filter((facility: PricePerPersonType) => value.includes(facility));
+				const availableFacilities = item.hotel.content.hotelFacilities.filter((facility) => value.includes(facility));
 				return availableFacilities.length === value.length
-			}
-		})
+			};
+			return item;
+		});
 		return filtered;
 	};
 
-	const [filteredHotelDetails, setFilteredHotelDetails] = useState<any>([]);
+	const [filteredHotelDetails, setFilteredHotelDetails] = useState<HolidayHotelsType[]>([]);
 
 	useEffect(() => {
 		const filterByStar = filterBy(hotels, { type: 'starRating', value: selectedStars });
@@ -102,7 +104,7 @@ const HotelDetails = ({ hotels }: any) => {
 				<div className='col-9'>
 					<div className='mt-3 ml-1'>
 						{filteredHotelDetails.length > 0 ?
-							(<div> {filteredHotelDetails.map((hotelData: any, id: any) => (
+							(<div> {filteredHotelDetails.map((hotelData: HolidayHotelsType, id: number) => (
 								<div className='row px-2 mt-1 border rounded' id='' key={id}>
 									<div className='col'>
 										<div className='hotel-image'>
@@ -130,17 +132,18 @@ const HotelDetails = ({ hotels }: any) => {
 											}
 										</div>
 										<div className='px-5'>
-											<b>{hotelData && hotelData.hotel && 
+											<b>{hotelData && hotelData.hotel &&
 												hotelData.hotel.tripAdvisor &&
-												hotelData.hotel.tripAdvisor.numReviews} </b> 
-											reviews
+												hotelData.hotel.tripAdvisor.numReviews} </b>
+											<label>reviews</label>
 										</div>
-										<div className='px-5'>
-											<b>{hotelData.hotel.content.vRating} </b> 
-											star ratings
-										</div>
+										{hotelData.hotel.content.starRating &&
+											<div className='px-5'>
+												<b>{hotelData.hotel.content.starRating} </b>
+												<label>star ratings</label>
+											</div>}
 										<div className='price-align'>
-											<b>Price/Person:</b> $ 
+											<b><label>Price/Person:</label></b> $
 											{hotelData.pricePerPerson}
 										</div>
 									</div>

@@ -10,9 +10,10 @@ import { locationOptions, adultsOptions, infantsOptions } from '../../helpers';
 import ErrorContainer from '../common/ErrorContainer';
 import Title from '../common/Title';
 import Header from '../common/Header';
-import {getHolidays} from "../../services";
+import { getHolidays } from "../../services";
 import { HolidaysRequestType } from "./HomeTypes";
-const HotelDetails = React.lazy(() => import('../hotelview/HotelDetails'));
+import HotelDetails from '../hotelview/HotelDetails';
+// import { HolidayHotelsType } from '../hotelview/HotelDetailsTypes';
 
 
 function Home() {
@@ -71,7 +72,7 @@ function Home() {
 		<div>
 			<Header header='Travel Veergi' className='navbar navbar-expand-lg navbar-light px-3 header-container' />
 			<div className='px-5'>
-				<div className='home-select-container border rounded mt-3'>
+				<div className='home-select-container rounded mt-3'>
 					<div className='row mx-auto'>
 						<div className='col-sm'>
 							<Title title='Booking Type' className='form-label text-dark' />
@@ -121,7 +122,6 @@ function Home() {
 								onChange={(date: Date) => setCheckInDate(date)}
 								minDate={moment().toDate()}
 								dateFormat="dd/MM/yyyy"
-								popperPlacement='left'
 							/>
 						</div>
 						<div className='col-sm'>

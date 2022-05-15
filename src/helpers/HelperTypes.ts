@@ -1,14 +1,14 @@
 export interface OptionsType {
-    label: string;
-    value: string;
+	label: string;
+	value: string;
 };
 
 export interface RatingAndFacilitiesType extends OptionsType {
-    isChecked: boolean;
-    name: string;
+	isChecked: boolean;
+	name: string;
 };
 
 export interface PricePerPersonType extends RatingAndFacilitiesType {
-    min: number;
-    max: number;
+	min: string;
+	max: string;
 }

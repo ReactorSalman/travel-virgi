@@ -1,14 +1,14 @@
 import React from 'react';
 
 interface ErrorProps {
-    error: string;
-    className: string;
+	error: string;
+	className: string;
 };
 
-const ErrorContainer = ({error, className}: ErrorProps) => {
-    return (
-        <div className={className}>{error}</div>
-    );
+const ErrorContainer = ({ error, className }: ErrorProps) => {
+	return (
+		<div className={className}>{error}</div>
+	);
 }
 
 export default ErrorContainer;
