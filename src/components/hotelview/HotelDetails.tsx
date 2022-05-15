@@ -25,52 +25,58 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 		<div className='container'>
 			<div className='row'>
 				<div className='col-3 filter-container mt-3'>
-					<h3><Title className='' label='Filter by:' /></h3>
-					<div className=''>
-						<div>
-							<h5><Title className='' label='Star rating' /></h5>
-							{ratings.map((option) => (
-								<label className='checkbox-container' key={`star${option.value}`}>{option.label}
-									<input
-										type='checkbox'
-										id={option.value}
-										checked={selectedStars.includes(option.value)}
-										onChange={(e) => { setSelectedStars((prev: string[]) => checkUnCheck(prev, e.target.id)) }}
-									/>
-									<span className='checkmark'></span>
-								</label>
-							))}
+					<div className='mt-2'>
+						<h4><Title className='px-3' label='Filter by' /></h4>
+						<div className='px-3'>
+							<div className='mt-4'>
+								<h6><Title className='' label='Star rating' /></h6>
+								{ratings.map((option) => (
+									<label className='checkbox-container' key={`star${option.value}`}>{option.label}
+										<input
+											type='checkbox'
+											id={option.value}
+											checked={selectedStars.includes(option.value)}
+											onChange={(e) => { setSelectedStars((prev: string[]) => checkUnCheck(prev, e.target.id)) }}
+										/>
+										<span className='checkmark'></span>
+									</label>
+								))}
+							</div>
 						</div>
-					</div>
 
-					<div>
-						<h5><Title className='' label='Price per person' /></h5>
-						{pricePerPerson.map((option) => (
-							<label className='checkbox-container' key={`price${option.value}`}>{option.label}
-								<input
-									type='checkbox'
-									id={`${option.min}-${option.max}`}
-									checked={selectedPricePerPerson.includes(`${option.min}-${option.max}`)}
-									onChange={(e) => { setSelectedPricePerPerson((prev: string[]) => checkUnCheck(prev, e.target.id)) }}
-								/>
-								<span className='checkmark'></span>
-							</label>
-						))}
-					</div>
+						<div className='px-3'>
+							<div className='mt-4'>
+								<h6><Title className='' label='Price per person' /></h6>
+								{pricePerPerson.map((option) => (
+									<label className='checkbox-container' key={`price${option.value}`}>{option.label}
+										<input
+											type='checkbox'
+											id={`${option.min}-${option.max}`}
+											checked={selectedPricePerPerson.includes(`${option.min}-${option.max}`)}
+											onChange={(e) => { setSelectedPricePerPerson((prev: string[]) => checkUnCheck(prev, e.target.id)) }}
+										/>
+										<span className='checkmark'></span>
+									</label>
+								))}
+							</div>
+						</div>
 
-					<div>
-						<h5><Title className='' label='Hotel facilities' /></h5>
-						{facilities.map((option) => (
-							<label className='checkbox-container' key={`facility${option.value}`}>{option.label}
-								<input
-									type='checkbox'
-									id={option.label}
-									checked={selectedFacilities.includes(option.label)}
-									onChange={(e) => { setSelectedFacilities((prev: string[]) => checkUnCheck(prev, e.target.id)) }}
-								/>
-								<span className='checkmark'></span>
-							</label>
-						))}
+						<div className='px-3'>
+							<div className='mt-4'>
+								<h6><Title className='' label='Hotel facilities' /></h6>
+								{facilities.map((option) => (
+									<label className='checkbox-container' key={`facility${option.value}`}>{option.label}
+										<input
+											type='checkbox'
+											id={option.label}
+											checked={selectedFacilities.includes(option.label)}
+											onChange={(e) => { setSelectedFacilities((prev: string[]) => checkUnCheck(prev, e.target.id)) }}
+										/>
+										<span className='checkmark'></span>
+									</label>
+								))}
+							</div>
+						</div>
 					</div>
 				</div>
 				<div className='col-9'>
