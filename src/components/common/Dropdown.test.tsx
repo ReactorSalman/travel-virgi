@@ -7,5 +7,5 @@ it("renders select option", () => {
 		throw new Error('Function not implemented.');
 	}} className={''} />);
 	const optionElement = screen.getByText(/select/i);
-	expect(optionElement).toBeInTheDocument;
+	expect(optionElement).toBeInTheDocument();
 });

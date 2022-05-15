@@ -4,40 +4,13 @@ import { ratings, pricePerPerson, facilities } from '../../helpers';
 import Title from '../common/Title';
 import ErrorContainer from '../common/ErrorContainer';
 import { HolidayHotelsType, Hotels } from '../../interfaces/HotelDetailsTypes';
+import { checkUnCheck, filterBy } from '../utils';
 
 const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 
 	const [selectedStars, setSelectedStars] = useState<string[]>([]);
 	const [selectedPricePerPerson, setSelectedPricePerPerson] = useState<string[]>([]);
 	const [selectedFacilities, setSelectedFacilities] = useState<string[]>([]);
-
-
-	const checkUnCheck = (prevSelections: string[], currentSelection: string) => {
-		if (prevSelections.includes(currentSelection)) {
-			return prevSelections.filter(selection => selection !== currentSelection)
-		} else {
-			return [...prevSelections, currentSelection]
-		}
-	};
-
-	const filterBy = (data: HolidayHotelsType[], { type, value }: { type: string; value: string[]; }) => {
-		if (!value.length) return data;
-		const filtered = data.filter((item) => {
-			if (type === 'starRating') {
-				return value.includes(item.hotel.content.starRating);
-			};
-			if (type === 'pricePerPerson') {
-				const minMaxes = value.map(v => v.split('-'));
-				return minMaxes.find(([min, max]) => item.pricePerPerson > Number(min) && item.pricePerPerson < Number(max))
-			};
-			if (type === 'hotelFacilities') {
-				const availableFacilities = item.hotel.content.hotelFacilities.filter((facility) => value.includes(facility));
-				return availableFacilities.length === value.length
-			};
-			return item;
-		});
-		return filtered;
-	};
 
 	const [filteredHotelDetails, setFilteredHotelDetails] = useState<HolidayHotelsType[]>([]);
 

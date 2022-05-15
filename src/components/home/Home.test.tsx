@@ -4,13 +4,13 @@ import Home from './Home';
 
 it("Should find header", () => {
 	render(<Home />);
-	const headerElement = screen.getByText('Travel veerji');
+	const headerElement = screen.getByText('Travel Veergi');
 	expect(headerElement).toBeInTheDocument;
 });
 
 it("Should find boarding dropdown", () => {
 	render(<Home />);
-	const wrapper = screen.getByText('Boarding Type');
+	const wrapper = screen.getByText('Booking Type');
 	expect(wrapper).toBeInTheDocument;
 });
 
