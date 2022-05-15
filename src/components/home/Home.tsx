@@ -125,7 +125,12 @@ const Home: React.FC = () => {
 							/>
 						</div>
 						<div className='col-sm'>
-							<Button id='home_button' className="btn btn-outline-light" onClick={handleSearch} disabled={isButtonDisabled} />
+							<Button 
+								id='home_button' 
+								className="btn btn-outline-light" 
+								onClick={handleSearch} 
+								disabled={isButtonDisabled} 
+							/>
 						</div>
 					</div>
 				</div>

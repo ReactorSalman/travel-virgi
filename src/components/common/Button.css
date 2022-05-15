@@ -1,0 +1,8 @@
+.btn-popper{
+	display: inline-block;
+	vertical-align: top;
+}
+
+button:disabled{
+	pointer-events: none;
+}
