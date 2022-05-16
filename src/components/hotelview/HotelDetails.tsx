@@ -5,6 +5,7 @@ import Title from '../common/Title';
 import ErrorContainer from '../common/ErrorContainer';
 import { HolidayHotelsType, Hotels } from '../../interfaces/HotelDetailsTypes';
 import { checkUnCheck, filterBy } from '../utils';
+import Header from '../common/Header';
 
 const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 
@@ -86,7 +87,7 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 								<div className='row px-2 mt-1 border rounded' id='' key={id}>
 									<div className='col'>
 										<div className='hotel-image'>
-											{hotelData && hotelData.hotel &&
+											{hotelData.hotel &&
 												hotelData.hotel.content && hotelData.hotel.content.images[0] &&
 												hotelData.hotel.content.images[0].RESULTS_CAROUSEL &&
 												<img src={hotelData.hotel.content.images[0].RESULTS_CAROUSEL.url}
@@ -96,33 +97,48 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 									<div className='col'>
 										<Title
 											className='hotel-name'
-											label={hotelData && hotelData.hotel && hotelData.hotel.name}
+											label={hotelData.hotel && hotelData.hotel.name}
 										/>
-										<div className='hotel-descprition'>{hotelData.hotel.content.hotelDescription}</div>
+										<div className='mt-2'>
+											<Title className='lh' label='About' />
+											<div className='hotel-descprition lh-sm'>
+												{hotelData.hotel &&
+												hotelData.hotel.content &&
+												hotelData.hotel.content.hotelDescription}
+											</div>
+										</div>
 									</div>
 									<div className='col'>
-										<div className='px-4'>
-											{hotelData && hotelData.hotel && hotelData.hotel.tripAdvisor &&
-												<img
-													src={hotelData.hotel.tripAdvisor.ratingImageUrl}
-													alt='ratings'
-												/>
-											}
+										<div className='row'>
+											<div className='col'>
+												{hotelData && hotelData.hotel && hotelData.hotel.tripAdvisor &&
+													<img
+														src={hotelData.hotel.tripAdvisor.ratingImageUrl}
+														alt='ratings'
+													/>
+												}
+											</div>
+											<div className='col text-center'>
+												<Title className='lh' label='Reviews' />
+												<div className='text-center'><b>{hotelData.hotel &&
+													hotelData.hotel.tripAdvisor &&
+													hotelData.hotel.tripAdvisor.numReviews ? 
+													hotelData.hotel.tripAdvisor.numReviews : 0}</b></div>
+											</div>
+											<div className='col text-center'>
+												<Title className='lh' label='Rating' />
+												<div className='text-center'>
+													<b>{hotelData.hotel && hotelData.hotel.content &&
+													hotelData.hotel.content.starRating ? 
+													hotelData.hotel.content.starRating : 0}</b>
+												</div>
+											</div>
 										</div>
-										<div className='px-5'>
-											<b>{hotelData && hotelData.hotel &&
-												hotelData.hotel.tripAdvisor &&
-												hotelData.hotel.tripAdvisor.numReviews} </b>
-											<label>reviews</label>
-										</div>
-										{hotelData.hotel.content.starRating &&
-											<div className='px-5'>
-												<b>{hotelData.hotel.content.starRating} </b>
-												<label>star ratings</label>
-											</div>}
-										<div className='price-align'>
-											<b><label>Price/Person:</label></b> $
-											{hotelData.pricePerPerson}
+										<div className='badge bg-secondary text-nowrap fs-6 price-align px-3 mx-2'>
+											<div className=''>
+												<b><Title className='lh' label='Price/Person' /></b>
+											</div>
+											<div>${hotelData.pricePerPerson}</div>
 										</div>
 									</div>
 								</div>

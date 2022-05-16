@@ -1,8 +1,8 @@
 .hotel-descprition {
 	font-size: 10px;
 	text-align: justify;
-	margin-top: 15px;
-	text-overflow: clip;
+	margin-top: 5px;
+	text-overflow: hidden;
 }
 
 .hotel-name {
@@ -83,6 +83,6 @@
 }
 
 .price-align {
-	margin-left: 35px;
-	margin-top: 50px;
+	position: absolute;
+	margin-top: 150px;
 }
