@@ -1,18 +1,18 @@
+@import url('http://fonts.cdnfonts.com/css/gotham');
+
 .hotel-descprition {
-	font-size: 10px;
+	font-size: 1.8ex;
+	font-family: 'Gotham', sans-serif;
+	position: relative;
+	display: block;
 	text-align: justify;
-	margin-top: 5px;
-	text-overflow: hidden;
 }
 
 .hotel-name {
 	color: #553c9a;
-	font-family: 'Lobster', Lucida;
 	font-size: 25px;
-	font-weight: normal;
-	text-shadow: 1px 0 0 #fff;
 	text-align: left;
-	text-overflow: clip;
+	font-family: 'Gotham', sans-serif;
 }
 
 .checkbox-container {
@@ -43,7 +43,7 @@
 	left: 0;
 	height: 25px;
 	width: 25px;
-	background-color: #eee;
+	background-color: #fff;
 	padding-left: 2px;
 }
 
@@ -85,4 +85,12 @@
 .price-align {
 	position: absolute;
 	margin-top: 150px;
+}
+
+.font-link {
+	font-family: 'Gotham', sans-serif;
+}
+
+.image-shadow {
+	box-shadow: 10px 10px 5px #e3f2ff
 }

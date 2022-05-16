@@ -25,10 +25,10 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 	return (
 		<div className='container'>
 			<div className='row'>
-				<div className='col-3 filter-container mt-3'>
+				<div className='col-2 filter-container mt-5'>
 					<div className='mt-2'>
-						<h4><Title className='px-3' label='Filter by' /></h4>
-						<div className='px-3'>
+						<h4><Title className='px-2' label='Filter by' /></h4>
+						<div className='px-2'>
 							<div className='mt-4'>
 								<h6><Title className='' label='Star rating' /></h6>
 								{ratings.map((option) => (
@@ -45,7 +45,7 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 							</div>
 						</div>
 
-						<div className='px-3'>
+						<div className='px-2'>
 							<div className='mt-4'>
 								<h6><Title className='' label='Price per person' /></h6>
 								{pricePerPerson.map((option) => (
@@ -62,7 +62,7 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 							</div>
 						</div>
 
-						<div className='px-3'>
+						<div className='px-2'>
 							<div className='mt-4'>
 								<h6><Title className='' label='Hotel facilities' /></h6>
 								{facilities.map((option) => (
@@ -80,31 +80,36 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 						</div>
 					</div>
 				</div>
-				<div className='col-9'>
-					<div className='mt-3 ml-1'>
+				<div className='col-10'>
+					<div className='mt-3'>
 						{filteredHotelDetails.length > 0 ?
 							(<div> {filteredHotelDetails.map((hotelData: HolidayHotelsType, id: number) => (
-								<div className='row px-2 mt-1 border rounded' id='' key={id}>
+								<div className='row mt-5' id='' key={id}>
 									<div className='col'>
-										<div className='hotel-image'>
+										<div className='hotel-image shadow p-3 mb-5 bg-white rounded'>
 											{hotelData.hotel &&
 												hotelData.hotel.content && hotelData.hotel.content.images[0] &&
 												hotelData.hotel.content.images[0].RESULTS_CAROUSEL &&
 												<img src={hotelData.hotel.content.images[0].RESULTS_CAROUSEL.url}
-													alt='hotel' width='285' height='260' />}
+													alt='hotel' width='400' height='400' className='rounded'/>}
 										</div>
 									</div>
 									<div className='col'>
-										<Title
-											className='hotel-name'
-											label={hotelData.hotel && hotelData.hotel.name}
-										/>
 										<div className='mt-2'>
-											<Title className='lh' label='About' />
-											<div className='hotel-descprition lh-sm'>
+											<span className='hotel-name'>
+											{hotelData.hotel && hotelData.hotel.name}
+											</span>
+										</div>
+										<div className='fs-5 mb-3'>
+											<div>${hotelData.pricePerPerson}</div>
+										</div>
+										<div className=''>
+											<div className=''>
+												<span className='hotel-descprition'>
 												{hotelData.hotel &&
 													hotelData.hotel.content &&
 													hotelData.hotel.content.hotelDescription}
+												</span>
 											</div>
 										</div>
 									</div>
@@ -133,12 +138,6 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 														hotelData.hotel.content.starRating : 0}</b>
 												</div>
 											</div>
-										</div>
-										<div className='badge bg-secondary text-nowrap fs-6 price-align px-3 mx-2'>
-											<div>
-												<b><Title className='lh' label='Price/Person' /></b>
-											</div>
-											<div>${hotelData.pricePerPerson}</div>
 										</div>
 									</div>
 								</div>
