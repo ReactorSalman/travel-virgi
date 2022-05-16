@@ -82,6 +82,7 @@ const Home: React.FC = () => {
 							<InputField
 								id='hotel_input_id'
 								className='form-control form-control-sm mt-1'
+								type={'input'}
 								value={'hotel'}
 								disabled={true}
 							/>

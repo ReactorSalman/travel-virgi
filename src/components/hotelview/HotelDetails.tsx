@@ -5,7 +5,7 @@ import Title from '../common/Title';
 import ErrorContainer from '../common/ErrorContainer';
 import { HolidayHotelsType, Hotels } from '../../interfaces/HotelDetailsTypes';
 import { checkUnCheck, filterBy } from '../utils';
-import Header from '../common/Header';
+import InputField from '../common/InputField';
 
 const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 
@@ -33,7 +33,7 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 								<h6><Title className='' label='Star rating' /></h6>
 								{ratings.map((option) => (
 									<label className='checkbox-container' key={`star${option.value}`}>{option.label}
-										<input
+										<InputField
 											type='checkbox'
 											id={option.value}
 											checked={selectedStars.includes(option.value)}
@@ -50,7 +50,7 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 								<h6><Title className='' label='Price per person' /></h6>
 								{pricePerPerson.map((option) => (
 									<label className='checkbox-container' key={`price${option.value}`}>{option.label}
-										<input
+										<InputField
 											type='checkbox'
 											id={`${option.min}-${option.max}`}
 											checked={selectedPricePerPerson.includes(`${option.min}-${option.max}`)}
@@ -67,7 +67,7 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 								<h6><Title className='' label='Hotel facilities' /></h6>
 								{facilities.map((option) => (
 									<label className='checkbox-container' key={`facility${option.value}`}>{option.label}
-										<input
+										<InputField
 											type='checkbox'
 											id={option.label}
 											checked={selectedFacilities.includes(option.label)}
@@ -103,8 +103,8 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 											<Title className='lh' label='About' />
 											<div className='hotel-descprition lh-sm'>
 												{hotelData.hotel &&
-												hotelData.hotel.content &&
-												hotelData.hotel.content.hotelDescription}
+													hotelData.hotel.content &&
+													hotelData.hotel.content.hotelDescription}
 											</div>
 										</div>
 									</div>
@@ -122,20 +122,20 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 												<Title className='lh' label='Reviews' />
 												<div className='text-center'><b>{hotelData.hotel &&
 													hotelData.hotel.tripAdvisor &&
-													hotelData.hotel.tripAdvisor.numReviews ? 
+													hotelData.hotel.tripAdvisor.numReviews ?
 													hotelData.hotel.tripAdvisor.numReviews : 0}</b></div>
 											</div>
 											<div className='col text-center'>
 												<Title className='lh' label='Rating' />
 												<div className='text-center'>
 													<b>{hotelData.hotel && hotelData.hotel.content &&
-													hotelData.hotel.content.starRating ? 
-													hotelData.hotel.content.starRating : 0}</b>
+														hotelData.hotel.content.starRating ?
+														hotelData.hotel.content.starRating : 0}</b>
 												</div>
 											</div>
 										</div>
 										<div className='badge bg-secondary text-nowrap fs-6 price-align px-3 mx-2'>
-											<div className=''>
+											<div>
 												<b><Title className='lh' label='Price/Person' /></b>
 											</div>
 											<div>${hotelData.pricePerPerson}</div>

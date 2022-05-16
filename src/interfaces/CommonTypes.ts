@@ -1,9 +1,10 @@
+import React from "react";
 import { OptionsType } from "./HelperTypes";
 
 export interface ButtonProps {
 	id: string;
-	disabled: boolean;
-	className: string;
+	disabled?: boolean;
+	className?: string;
 	onClick: React.MouseEventHandler<HTMLButtonElement>;
 
 };
@@ -17,12 +18,16 @@ export interface DropdownProps {
 
 export interface CommonProps {
 	label: string;
-	className: string;
+	className?: string;
 };
 
 export interface InputProps {
 	id: string;
-	value: string;
-	disabled: boolean;
-	className: string;
+	type: string;
+	value?: string;
+	disabled?: boolean;
+	className?: string;
+	checked?: boolean;
+	onChange?: React.ChangeEventHandler<HTMLInputElement>;
+
 };
