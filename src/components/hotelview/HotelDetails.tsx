@@ -26,10 +26,10 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 	return (
 		<div className='container'>
 			<div className='row'>
-				<div className='col-2 filter-container mt-5'>
-					<div className='mt-2'>
-						<h4><Title className='px-2' label='Filter by' /></h4>
-						<div className='px-2'>
+				<div className='col-2 filter-container mt-5 card border-0 h-100'>
+					<div className='mt-2 card-body'>
+						<h4><Title className='px-2 card-title' label='Filter by' /></h4>
+						<div className=''>
 							<div className='mt-4'>
 								<h6><Title className='' label='Star rating' /></h6>
 								{ratings.map((option) => (
@@ -46,7 +46,7 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 							</div>
 						</div>
 
-						<div className='px-2'>
+						<div className=''>
 							<div className='mt-4'>
 								<h6><Title className='' label='Price per person' /></h6>
 								{pricePerPerson.map((option) => (
@@ -63,7 +63,7 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 							</div>
 						</div>
 
-						<div className='px-2'>
+						<div className=''>
 							<div className='mt-4'>
 								<h6><Title className='' label='Hotel facilities' /></h6>
 								{facilities.map((option) => (
