@@ -19,3 +19,13 @@ Delete
 
 Re-install libraries using:
 ### `npm install` 
+
+## Run test cases
+
+Use below command to run test cases:
+
+### `npm run test`
+
+Follow the steps after execution above command appear on the terminal.
+
+
