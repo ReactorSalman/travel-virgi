@@ -92,15 +92,15 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 												hotelData.hotel.content && hotelData.hotel.content.images[0] &&
 												hotelData.hotel.content.images[0].RESULTS_CAROUSEL &&
 												<img src={hotelData.hotel.content.images[0].RESULTS_CAROUSEL.url}
-													alt='hotel' width='400' height='400' className='rounded' />}
+													alt='hotel' width='350' height='350' className='rounded' />}
 										</div>
 									</div>
 									<div className='col card'>
 										<div className='card-body'>
 											<div className='mt-2'>
-												<div className='hotel-name card-title'>
+												<span className='hotel-name card-title'>
 													{hotelData.hotel && hotelData.hotel.name}
-												</div>
+												</span>
 											</div>
 											<div className='fs-5 mb-3 price-align card-subtitle'>
 												<div>${hotelData.pricePerPerson}</div>
