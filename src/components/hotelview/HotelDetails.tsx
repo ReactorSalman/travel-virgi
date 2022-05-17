@@ -28,7 +28,7 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 			<div className='row'>
 				<div className='col-2 filter-container mt-5 card border-0 h-100'>
 					<div className='mt-2 card-body'>
-						<h4><Title className='card-title ' label='Filter by' /></h4>
+						<h4><Title className='card-title' label='Filter by' /></h4>
 						<div className=''>
 							<div className='mt-4'>
 								<h6><Title className='' label='Star rating' /></h6>
@@ -106,7 +106,7 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 												<div>${hotelData.pricePerPerson}</div>
 											</div>
 											<div className=''>
-												<OverlayTrigger placement='bottom' delay={{ show: 250, hide: 400 }} overlay={
+												<OverlayTrigger placement='right' delay={{ show: 250, hide: 250 }} overlay={
 													<Tooltip>
 														{hotelData.hotel &&
 															hotelData.hotel.content &&
