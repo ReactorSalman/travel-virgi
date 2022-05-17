@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import './HotelDetails.css';
 import { ratings, pricePerPerson, facilities } from '../../helpers';
 import Title from '../common/Title';
 import ErrorContainer from '../common/ErrorContainer';
 import { HolidayHotelsType, Hotels } from '../../interfaces/HotelDetailsTypes';
 import { checkUnCheck, filterBy } from '../utils';
 import InputField from '../common/InputField';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import './HotelDetails.css';
 
 const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 
@@ -86,35 +87,44 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 							(<div> {filteredHotelDetails.map((hotelData: HolidayHotelsType, id: number) => (
 								<div className='row mt-5' id='' key={id}>
 									<div className='col'>
-										<div className='hotel-image shadow p-3 mb-5 bg-white rounded'>
+										<div className='shadow p-3 bg-white rounded'>
 											{hotelData.hotel &&
 												hotelData.hotel.content && hotelData.hotel.content.images[0] &&
 												hotelData.hotel.content.images[0].RESULTS_CAROUSEL &&
 												<img src={hotelData.hotel.content.images[0].RESULTS_CAROUSEL.url}
-													alt='hotel' width='400' height='400' className='rounded'/>}
+													alt='hotel' width='400' height='400' className='rounded' />}
 										</div>
 									</div>
-									<div className='col'>
-										<div className='mt-2'>
-											<span className='hotel-name'>
-											{hotelData.hotel && hotelData.hotel.name}
-											</span>
-										</div>
-										<div className='fs-5 mb-3'>
-											<div>${hotelData.pricePerPerson}</div>
-										</div>
-										<div className=''>
+									<div className='col card'>
+										<div className='card-body'>
+											<div className='mt-2'>
+												<div className='hotel-name card-title'>
+													{hotelData.hotel && hotelData.hotel.name}
+												</div>
+											</div>
+											<div className='fs-5 mb-3 price-align card-subtitle'>
+												<div>${hotelData.pricePerPerson}</div>
+											</div>
 											<div className=''>
-												<span className='hotel-descprition'>
-												{hotelData.hotel &&
-													hotelData.hotel.content &&
-													hotelData.hotel.content.hotelDescription}
-												</span>
+												<OverlayTrigger placement='bottom' delay={{ show: 250, hide: 400 }} overlay={
+													<Tooltip>
+														{hotelData.hotel &&
+															hotelData.hotel.content &&
+															hotelData.hotel.content.hotelDescription}
+													</Tooltip>}>
+													<div className='card border-0'>
+														<p className='card-body text-muted text-truncate'>
+															{hotelData.hotel &&
+																hotelData.hotel.content &&
+																hotelData.hotel.content.hotelDescription}
+														</p>
+													</div>
+												</OverlayTrigger>
 											</div>
 										</div>
 									</div>
-									<div className='col'>
-										<div className='row'>
+									<div className='col card border-start-0'>
+										<div className='row mt-4'>
 											<div className='col'>
 												{hotelData && hotelData.hotel && hotelData.hotel.tripAdvisor &&
 													<img

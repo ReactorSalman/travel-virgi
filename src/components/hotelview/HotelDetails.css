@@ -1,11 +1,8 @@
 @import url('http://fonts.cdnfonts.com/css/gotham');
 
 .hotel-descprition {
-	font-size: 1.8ex;
 	font-family: 'Gotham', sans-serif;
 	position: relative;
-	display: block;
-	text-align: justify;
 }
 
 .hotel-name {
@@ -83,8 +80,7 @@
 }
 
 .price-align {
-	position: absolute;
-	margin-top: 150px;
+	color: #9B2335;
 }
 
 .font-link {
