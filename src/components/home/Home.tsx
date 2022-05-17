@@ -59,7 +59,7 @@ const Home: React.FC = () => {
 		getHolidays(payload)
 			.then((response) => {
 				setLoading(false);
-				const holidaysList = response['data'] && response['data']['holidays'];
+				const holidaysList = response.data?.holidays;
 				return setHolidaysData([holidaysList]);
 			})
 			.catch((err) => {

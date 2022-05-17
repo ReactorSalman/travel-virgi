@@ -88,9 +88,7 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 								<div className='row mt-5' id='' key={id}>
 									<div className='col'>
 										<div className='shadow p-3 bg-white rounded'>
-											{hotelData.hotel &&
-												hotelData.hotel.content && hotelData.hotel.content.images[0] &&
-												hotelData.hotel.content.images[0].RESULTS_CAROUSEL &&
+											{hotelData.hotel?.content?.images[0]?.RESULTS_CAROUSEL.url &&
 												<img src={hotelData.hotel.content.images[0].RESULTS_CAROUSEL.url}
 													alt='hotel' width='350' height='350' className='rounded' />}
 										</div>
@@ -99,7 +97,7 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 										<div className='card-body'>
 											<div className='mt-2'>
 												<span className='hotel-name card-title'>
-													{hotelData.hotel && hotelData.hotel.name}
+													{hotelData?.hotel?.name}
 												</span>
 											</div>
 											<div className='fs-5 mb-3 price-align card-subtitle'>
@@ -108,15 +106,11 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 											<div className=''>
 												<OverlayTrigger placement='right' delay={{ show: 250, hide: 250 }} overlay={
 													<Tooltip>
-														{hotelData.hotel &&
-															hotelData.hotel.content &&
-															hotelData.hotel.content.hotelDescription}
+														{hotelData.hotel?.content?.hotelDescription}
 													</Tooltip>}>
 													<div className='card border-0'>
 														<p className='card-body text-muted text-truncate'>
-															{hotelData.hotel &&
-																hotelData.hotel.content &&
-																hotelData.hotel.content.hotelDescription}
+															{hotelData?.hotel?.content?.hotelDescription}
 														</p>
 													</div>
 												</OverlayTrigger>
@@ -126,7 +120,7 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 									<div className='col card border-start-0'>
 										<div className='row mt-4'>
 											<div className='col'>
-												{hotelData && hotelData.hotel && hotelData.hotel.tripAdvisor &&
+												{hotelData.hotel?.tripAdvisor?.ratingImageUrl &&
 													<img
 														src={hotelData.hotel.tripAdvisor.ratingImageUrl}
 														alt='ratings'
@@ -135,16 +129,16 @@ const HotelDetails: React.FC<Hotels> = ({ hotels }: Hotels) => {
 											</div>
 											<div className='col text-center'>
 												<Title className='lh' label='Reviews' />
-												<div className='text-center'><b>{hotelData.hotel &&
-													hotelData.hotel.tripAdvisor &&
-													hotelData.hotel.tripAdvisor.numReviews ?
-													hotelData.hotel.tripAdvisor.numReviews : 0}</b></div>
+												<div className='text-center'>
+													<b>{hotelData.hotel?.tripAdvisor?.numReviews ?
+														hotelData.hotel.tripAdvisor.numReviews : 0}
+													</b>
+												</div>
 											</div>
 											<div className='col text-center'>
 												<Title className='lh' label='Rating' />
 												<div className='text-center'>
-													<b>{hotelData.hotel && hotelData.hotel.content &&
-														hotelData.hotel.content.starRating ?
+													<b>{hotelData.hotel?.content?.starRating ?
 														hotelData.hotel.content.starRating : 0}</b>
 												</div>
 											</div>
